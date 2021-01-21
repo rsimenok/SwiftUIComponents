@@ -2,10 +2,6 @@
 
 A collection of SwiftUI components.
 
-Swift Package Manager
-
-```https://github.com/moyoteg/SwiftUIComponents```
-
 [![License][license badge]][license]
 [![Swift Version][swift version badge]][swift version]
 
