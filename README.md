@@ -1,3 +1,3 @@
 # SwiftUIComponents
 
-A description of this package.
+A collection of SwiftUI components.
