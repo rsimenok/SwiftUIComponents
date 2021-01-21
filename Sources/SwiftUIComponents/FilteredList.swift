@@ -13,7 +13,7 @@ public protocol StringFilterable {
     var filter: String { get }
 }
 
-struct FilteredList<Element, Content: View>: View {
+public struct FilteredList<Element, Content: View>: View {
     
     let title: String
     let list: [StringFilterable]
