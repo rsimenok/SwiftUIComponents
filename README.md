@@ -2,9 +2,6 @@
 
 A collection of SwiftUI components.
 
-[![License][license badge]][license]
-[![Swift Version][swift version badge]][swift version]
-
 A precise, type-safe representation of monetary amounts in a given currency.
 
 This functionality is discussed in Chapter 3 of
