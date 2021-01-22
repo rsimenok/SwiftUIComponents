@@ -13,12 +13,12 @@ public protocol StringFilterable {
     var filter: String { get }
 }
 
-public struct FilteredList<Element, Content: View>: View {
+public struct FilteredList<Element: StringFilterable, Content: View>: View {
     
     let title: String
-    let list: [StringFilterable]
+    let list: [Element]
     @State var filter: String = ""
-    @State var filteredList: [StringFilterable] = []
+    @State var filteredList: [Element] = []
     var content: (Element) -> Content
     
     public var body: some View {
@@ -63,7 +63,7 @@ public struct FilteredList<Element, Content: View>: View {
                 } else {
                     ForEach(filteredList,
                             id:\.self.filter) { element in
-                        content(element as! Element)
+                        content(element)
                     }
                 }
             }
@@ -75,7 +75,7 @@ public struct FilteredList<Element, Content: View>: View {
     }
     
     public init(title: String,
-                list: [StringFilterable],
+                list: [Element],
                 @ViewBuilder content: @escaping (Element) -> Content) {
         self.title = title
         self.list = list
