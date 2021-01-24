@@ -9,11 +9,12 @@
 import Foundation
 import SwiftUI
 
-public protocol StringFilterable: CustomStringConvertible {
+public protocol StringFilterable: CustomStringConvertible, Hashable {
     var filter: String { get }
 }
 
-public struct FilteredList<Element: StringFilterable, Content: View>: View {
+public struct FilteredList<Element: StringFilterable,
+                           Content: View>: View {
     
     let title: String
     let list: [Element]
@@ -21,7 +22,8 @@ public struct FilteredList<Element: StringFilterable, Content: View>: View {
     @State var filteredList: [Element] = []
     var content: (Element) -> Content
     var onDelete: (((IndexSet) -> Void)?)
-    
+    @State var selection = Set<Element>()
+
     public var body: some View {
         let binding = Binding(
             get: { self.filter },
@@ -62,7 +64,7 @@ public struct FilteredList<Element: StringFilterable, Content: View>: View {
             
             Divider()
             
-            List {
+            List(selection: $selection) {
                 if filteredList.isEmpty {
                     Text("Nothing to show")
                 } else {
@@ -82,12 +84,14 @@ public struct FilteredList<Element: StringFilterable, Content: View>: View {
     
     public init(title: String,
                 list: [Element],
+                selection: Set<Element> = Set<Element>(),
                 @ViewBuilder content: @escaping (Element) -> Content) {
         self.title = title
         self.list = list.sorted {
             $0.description < $1.description
         }
         self.content = content
+        self.selection = selection
     }
 }
 
@@ -97,5 +101,5 @@ extension FilteredList {
          var copy = self
          copy.onDelete = offsets
          return copy
-     }
+    }
 }
