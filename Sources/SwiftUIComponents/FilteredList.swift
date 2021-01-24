@@ -93,7 +93,7 @@ public struct FilteredList<Element: StringFilterable, Content: View>: View {
 
 extension FilteredList {
 
-    func onDelete(offsets: @escaping (IndexSet) -> Void ) -> Self {
+    public func onDelete(offsets: @escaping (IndexSet) -> Void ) -> Self {
          var copy = self
          copy.onDelete = offsets
          return copy
