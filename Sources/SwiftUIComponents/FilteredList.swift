@@ -33,10 +33,12 @@ public struct FilteredList<Element: StringFilterable, Content: View>: View {
                             .lowercased()
                             .contains(filter.lowercased())
                     }
+                    .sorted {
+                        $0.description < $1.description
+                    }
+                    
                     if filter.count == 0 {
-                        filteredList = list.sorted {
-                            $0.description < $1.description
-                        }
+                        filteredList = list
                     }
                 }
                 print("filtered count: \(filteredList.count)")
@@ -80,7 +82,9 @@ public struct FilteredList<Element: StringFilterable, Content: View>: View {
                 list: [Element],
                 @ViewBuilder content: @escaping (Element) -> Content) {
         self.title = title
-        self.list = list
+        self.list = list.sorted {
+            $0.description < $1.description
+        }
         self.content = content
     }
 }
