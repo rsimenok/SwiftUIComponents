@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-public protocol StringFilterable {
+public protocol StringFilterable: CustomStringConvertible {
     var filter: String { get }
 }
 
@@ -34,7 +34,9 @@ public struct FilteredList<Element: StringFilterable, Content: View>: View {
                             .contains(filter.lowercased())
                     }
                     if filter.count == 0 {
-                        filteredList = list
+                        filteredList = list.sorted {
+                            $0.description < $1.description
+                        }
                     }
                 }
                 print("filtered count: \(filteredList.count)")
