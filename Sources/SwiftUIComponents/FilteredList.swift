@@ -20,6 +20,7 @@ public struct FilteredList<Element: StringFilterable, Content: View>: View {
     @State var filter: String = ""
     @State var filteredList: [Element] = []
     var content: (Element) -> Content
+    var onDelete: (((IndexSet) -> Void)?)
     
     public var body: some View {
         let binding = Binding(
@@ -69,6 +70,7 @@ public struct FilteredList<Element: StringFilterable, Content: View>: View {
                             id:\.self.filter) { element in
                         content(element)
                     }
+                    .onDelete(perform: onDelete)
                 }
             }
             .navigationBarTitle(title)
@@ -87,4 +89,13 @@ public struct FilteredList<Element: StringFilterable, Content: View>: View {
         }
         self.content = content
     }
+}
+
+extension FilteredList {
+
+    func onDelete(offsets: @escaping (IndexSet) -> Void ) -> Self {
+         var copy = self
+         copy.onDelete = offsets
+         return copy
+     }
 }
