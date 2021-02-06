@@ -82,8 +82,8 @@ public struct FilteredList<Element: StringFilterable,
         }
     }
     
-    public init(title: String,
-                list: [Element],
+    public init(_ title: String = "",
+                _ list: [Element],
                 selection: Set<Element> = Set<Element>(),
                 @ViewBuilder content: @escaping (Element) -> Content) {
         self.title = title
