@@ -28,7 +28,7 @@ public struct FilteredList<Element: StringFilterable,
         let binding = Binding(
             get: { self.filter },
             set: { text in
-                withAnimation(.easeIn(duration: 0.1)) {
+                withAnimation(.easeIn(duration: 0.01)) {
                     
                     self.filter = text
                     print("filter: \(filter)")
