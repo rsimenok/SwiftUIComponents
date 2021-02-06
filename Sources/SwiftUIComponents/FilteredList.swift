@@ -27,14 +27,14 @@ public struct FilteredList<Element: StringFilterable,
     public var body: some View {
         let binding = Binding(
             get: { self.filter },
-            set: { text in                    
+            set: { text in
                 self.filter = text
                 print("filter: \(filter)")
                 
                 if filter.isEmpty {
                     filteredList = list
                 } else {
-                    filteredList = list.filter{
+                    filteredList = list.filter {
                         $0.filter
                             .lowercased()
                             .contains(filter.lowercased())
@@ -70,6 +70,7 @@ public struct FilteredList<Element: StringFilterable,
                     ForEach(filteredList,
                             id:\.self.filter) { element in
                         content(element)
+                            .animation(.easeIn(duration: 0.3))
                     }
                     .onDelete(perform: onDelete)
                 }
