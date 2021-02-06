@@ -70,7 +70,6 @@ public struct FilteredList<Element: StringFilterable,
                     ForEach(filteredList,
                             id:\.self.filter) { element in
                         content(element)
-                            .animation(.easeIn(duration: 0.3))
                     }
                     .onDelete(perform: onDelete)
                 }
