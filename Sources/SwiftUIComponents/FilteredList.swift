@@ -23,27 +23,24 @@ public struct FilteredList<Element: StringFilterable,
     var content: (Element) -> Content
     var onDelete: (((IndexSet) -> Void)?)
     @State var selection = Set<Element>()
-
+    
     public var body: some View {
         let binding = Binding(
             get: { self.filter },
-            set: { text in
-                withAnimation {
-                    
-                    self.filter = text
-                    print("filter: \(filter)")
-                    
-                    if filter.isEmpty {
-                        filteredList = list
-                    } else {
-                        filteredList = list.filter{
-                            $0.filter
-                                .lowercased()
-                                .contains(filter.lowercased())
-                        }
-                        .sorted {
-                            $0.description < $1.description
-                        }
+            set: { text in                    
+                self.filter = text
+                print("filter: \(filter)")
+                
+                if filter.isEmpty {
+                    filteredList = list
+                } else {
+                    filteredList = list.filter{
+                        $0.filter
+                            .lowercased()
+                            .contains(filter.lowercased())
+                    }
+                    .sorted {
+                        $0.description < $1.description
                     }
                 }
                 print("filtered count: \(filteredList.count)")
@@ -98,10 +95,10 @@ public struct FilteredList<Element: StringFilterable,
 }
 
 extension FilteredList {
-
+    
     public func onDelete(offsets: @escaping (IndexSet) -> Void ) -> Self {
-         var copy = self
-         copy.onDelete = offsets
-         return copy
+        var copy = self
+        copy.onDelete = offsets
+        return copy
     }
 }
