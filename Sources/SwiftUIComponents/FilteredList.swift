@@ -29,19 +29,21 @@ public struct FilteredList<Element: StringFilterable,
             get: { self.filter },
             set: { text in
                 withAnimation {
+                    
                     self.filter = text
                     print("filter: \(filter)")
-                    filteredList = list.filter{
-                        $0.filter
-                            .lowercased()
-                            .contains(filter.lowercased())
-                    }
-                    .sorted {
-                        $0.description < $1.description
-                    }
                     
-                    if filter.count == 0 {
+                    if filter.isEmpty {
                         filteredList = list
+                    } else {
+                        filteredList = list.filter{
+                            $0.filter
+                                .lowercased()
+                                .contains(filter.lowercased())
+                        }
+                        .sorted {
+                            $0.description < $1.description
+                        }
                     }
                 }
                 print("filtered count: \(filteredList.count)")
