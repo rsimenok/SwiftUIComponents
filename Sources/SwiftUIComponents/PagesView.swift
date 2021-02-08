@@ -102,7 +102,7 @@ public struct PagesView<Content: View>: View {
         }
     }
     
-    init(pageCount: Binding<Int>,
+    public init(pageCount: Binding<Int>,
          currentIndex: Binding<Int>,
          isSelecting: Binding<Bool>,
          selectionDirection: SelectionDirection = .horizontal,
