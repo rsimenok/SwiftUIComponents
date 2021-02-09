@@ -106,7 +106,7 @@ public struct PagesView<Content: View>: View {
          currentIndex: Binding<Int>,
          isSelecting: Binding<Bool>,
          selectionDirection: SelectionDirection = .horizontal,
-         @ViewBuilder content: () -> Content,
+         content: Content,
          pageControlColor: Color = .white,
          selectionColor: Color = .blue,
          blurRadius: CGFloat = 20.0) {
@@ -114,7 +114,7 @@ public struct PagesView<Content: View>: View {
         self._currentIndex = currentIndex
         self._isSelecting = isSelecting
         self.selectionDirection = selectionDirection
-        self.content = content()
+        self.content = content
         self.pageControlColor = pageControlColor
         self.selectionColor = selectionColor
         self.blurRadius = blurRadius
