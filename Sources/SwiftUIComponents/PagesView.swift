@@ -97,8 +97,6 @@ public struct PagesView<Content: View>: View {
                 }
                 .padding()
             }
-            // if there is only one page don't enable interaction
-            .disabled(pageCount <= 1)
         }
     }
     
