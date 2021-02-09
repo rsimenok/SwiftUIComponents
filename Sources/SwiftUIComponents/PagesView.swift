@@ -21,9 +21,9 @@ public struct PagesView<Content: View>: View {
     @Binding var isSelecting: Bool
     @GestureState private var translation: CGFloat = 0
     
-    @State var pageControlColor: Color = .white
-    @State var selectionColor: Color = .blue
-    @State var blurRadius: CGFloat = 20.0
+    var pageControlColor: Color
+    var selectionColor: Color
+    var blurRadius: CGFloat
     
     var selectionDirection: SelectionDirection
     let selectionTolerance: CGFloat = 0.1
@@ -46,6 +46,10 @@ public struct PagesView<Content: View>: View {
                 .gesture(
                     DragGesture()
                         .onChanged({ (value) in
+                            
+                            // if there is only one page don't enable interaction
+                            if pageCount <= 1 { return }
+                            
                             // check if translating in "selection direction"
                             switch selectionDirection {
                             case .horizontal:
@@ -65,6 +69,9 @@ public struct PagesView<Content: View>: View {
                             }
                         })
                         .updating(self.$translation) { value, state, _ in
+                            
+                            // if there is only one page don't enable interaction
+                            if pageCount <= 1 { return }
                             
                             state = value.translation.width
 
@@ -104,15 +111,15 @@ public struct PagesView<Content: View>: View {
          currentIndex: Binding<Int>,
          isSelecting: Binding<Bool>,
          selectionDirection: SelectionDirection = .horizontal,
-         content: Content,
          pageControlColor: Color = .white,
          selectionColor: Color = .blue,
-         blurRadius: CGFloat = 20.0) {
+         blurRadius: CGFloat = 20.0,
+         @ViewBuilder content: () -> Content) {
         self._pageCount = pageCount
         self._currentIndex = currentIndex
         self._isSelecting = isSelecting
         self.selectionDirection = selectionDirection
-        self.content = content
+        self.content = content()
         self.pageControlColor = pageControlColor
         self.selectionColor = selectionColor
         self.blurRadius = blurRadius

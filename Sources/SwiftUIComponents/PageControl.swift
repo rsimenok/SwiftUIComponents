@@ -13,9 +13,9 @@ public struct PageControl: View {
     @Binding var pageCount: Int
     @Binding var isSelecting: Bool
 
-    @State var pageControlColor: Color = .white
-    @State var selectionColor: Color = .blue
-    @State var blurRadius: CGFloat = 20.0
+    var pageControlColor: Color
+    var selectionColor: Color
+    var blurRadius: CGFloat
 
     // visuals
     let pageControlSize: CGFloat = 8
