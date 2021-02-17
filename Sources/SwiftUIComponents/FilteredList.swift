@@ -52,7 +52,7 @@ public struct FilteredList<Element: StringFilterable,
             HStack {
                 Image(systemName: "magnifyingglass")
                 Text("(\(filter.isEmpty ? "\(list.count)":"\(filteredList.count)"))")
-                TextField("filter \(list.count)", text: binding.animation(.spring()))
+                TextField("filter", text: binding.animation(.spring()))
                     .padding([.top, .bottom], 8)
                     .modifier(Modifier.ClearButton(text: binding))
             }
