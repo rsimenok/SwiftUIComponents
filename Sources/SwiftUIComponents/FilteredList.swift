@@ -75,6 +75,7 @@ public struct FilteredList<Element: StringFilterable,
                     .onDelete(perform: onDelete)
                 }
             }
+            .navigationBarTitle(title ?? "")
         }
         .onAppear {
             self.filteredList = list
