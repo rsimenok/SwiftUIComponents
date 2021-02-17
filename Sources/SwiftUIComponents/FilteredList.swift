@@ -70,8 +70,10 @@ public struct FilteredList<Element: StringFilterable,
                 } else {
                     ForEach(filteredList,
                             id:\.self.filter) { element in
-                        content(element)
-                            .navigationBarTitle(title(element))
+                        if #available(iOS 14.0, *) {
+                            content(element)
+                                .navigationTitle(title(element))
+                        }
                     }
                     .onDelete(perform: onDelete)
                 }
