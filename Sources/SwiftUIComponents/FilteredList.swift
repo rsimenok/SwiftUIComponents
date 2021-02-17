@@ -29,7 +29,7 @@ public struct FilteredList<Element: StringFilterable,
             get: { self.filter },
             set: { text in
                 
-                self.filter = text
+                self.filter = text + "(\(filteredList.count))"
                 print("filter: \(filter)")
                 
                 if filter.isEmpty {
@@ -51,7 +51,7 @@ public struct FilteredList<Element: StringFilterable,
         return VStack {
             HStack {
                 Image(systemName: "magnifyingglass")
-                TextField("filter", text: binding.animation(.spring()))
+                TextField("filter (\(list.count))", text: binding.animation(.spring()))
                     .padding([.top, .bottom], 8)
                     .modifier(Modifier.ClearButton(text: binding))
             }
