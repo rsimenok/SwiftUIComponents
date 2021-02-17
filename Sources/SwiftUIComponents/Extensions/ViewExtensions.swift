@@ -206,7 +206,6 @@ public struct PopUp<PopUpContent: View>: ViewModifier {
                         
                         , alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .transition(.scale)
-                    .padding(.top, 42)
                     .shadow(radius: 10)
             }
         }
