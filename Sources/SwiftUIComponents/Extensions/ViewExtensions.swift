@@ -26,7 +26,7 @@ public struct RainbowAnimation: ViewModifier {
             .linear(duration: duration)
             .repeatForever(autoreverses: false)
     }
-
+    
     public func body(content: Content) -> some View {
         // 3
         let gradient = LinearGradient(gradient: Gradient(colors: hueColors+hueColors), startPoint: .leading, endPoint: .trailing)
@@ -39,11 +39,11 @@ public struct RainbowAnimation: ViewModifier {
                     .offset(x: self.isOn ? -proxy.size.width/2 : proxy.size.width/2)
             }
         })
-            // 6
-            .onAppear {
-                withAnimation(self.animation) {
-                    self.isOn = true
-                }
+        // 6
+        .onAppear {
+            withAnimation(self.animation) {
+                self.isOn = true
+            }
         }
         .mask(content)
     }
@@ -52,22 +52,22 @@ public struct RainbowAnimation: ViewModifier {
 public struct FadeModifier: AnimatableModifier {
     // To trigger the animation as well as to hold its final state
     private let control: Bool
-
+    
     // SwiftUI gradually varies it from old value to the new value
     public var animatableData: Double = 0.0
-
+    
     // Re-created every time the control argument changes
     init(control: Bool) {
         // Set control to the new value
         self.control = control
-
+        
         // Set animatableData to the new value. But SwiftUI again directly
         // and gradually varies it from 0 to 1 or 1 to 0, while the body
         // is being called to animate. Following line serves the purpose of
         // associating the extenal control argument with the animatableData.
         self.animatableData = control ? 1.0 : 0.0
     }
-
+    
     // Called after each gradual change in animatableData to allow the
     // modifier to animate
     public func body(content: Content) -> some View {
@@ -75,7 +75,7 @@ public struct FadeModifier: AnimatableModifier {
         content
             // Map each "0 to 1" and "1 to 0" change to a "0 to 1" change
             .opacity(control ? animatableData : 1.0 - animatableData)
-
+            
             // This modifier is animating the opacity by gradually setting
             // incremental values. We don't want the system also to
             // implicitly animate it each time we set it. It will also cancel
@@ -85,22 +85,22 @@ public struct FadeModifier: AnimatableModifier {
 }
 
 public extension View {
-
+    
     func animatableFont(name: String, size: CGFloat) -> some View {
         self.modifier(AnimatableCustomFontModifier(name: name, size: size))
     }
 }
 
 public struct AnimatableCustomFontModifier: AnimatableModifier {
-
+    
     var name: String
     var size: CGFloat
-
+    
     public var animatableData: CGFloat {
         get { size }
         set { size = newValue }
     }
-
+    
     public func body(content: Content) -> some View {
         content
             .font(.custom(name, size: size))
@@ -119,12 +119,12 @@ public struct AnimatableSystemFontModifier: AnimatableModifier {
     public var size: CGFloat
     public var weight: Font.Weight
     public var design: Font.Design
-
+    
     public var animatableData: CGFloat {
         get { size }
         set { size = newValue }
     }
-
+    
     public func body(content: Content) -> some View {
         content
             .font(.system(size: size, weight: weight, design: design))
@@ -174,11 +174,61 @@ public extension View {
 public extension View {
     func animateForever(using animation: Animation = Animation.easeInOut(duration: 1), autoreverses: Bool = false, _ action: @escaping () -> Void) -> some View {
         let repeated = animation.repeatForever(autoreverses: autoreverses)
-
+        
         return onAppear {
             withAnimation(repeated) {
                 action()
             }
         }
+    }
+}
+
+
+public struct PopUp<PopUpContent: View>: ViewModifier {
+    
+    @Binding private var isPresented: Bool
+    let popUpContent: () -> PopUpContent
+    let onDismiss: (() -> Void)?
+    
+    public func body(content: Content) -> some View {
+        ZStack {
+            content
+            if isPresented {
+                popUpContent()
+                    .onDisappear {
+                        onDismiss?()
+                    }
+                    .padding()
+                    .background(
+                        Rectangle()
+                            .fill(Color.white)
+                            .cornerRadius(15)
+                        
+                        , alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .transition(.scale)
+                    .padding(.top, 42)
+                    .shadow(radius: 10)
+            }
+        }
+        
+    }
+    
+    
+    public init(isPresented: Binding<Bool>,
+                onDismiss: (() -> Void)? = nil,
+                @ViewBuilder popUpContent: @escaping () -> PopUpContent) {
+        self._isPresented = isPresented
+        self.onDismiss = onDismiss
+        self.popUpContent = popUpContent
+    }
+}
+
+public extension View {
+    
+    func popUp<Content>(isPresented: Binding<Bool>,
+                        onDismiss: (() -> Void)? = nil,
+                        @ViewBuilder content: @escaping () -> Content
+    ) -> some View where Content : View {
+        self.modifier(PopUp(isPresented: isPresented, onDismiss: onDismiss, popUpContent: content))
     }
 }
