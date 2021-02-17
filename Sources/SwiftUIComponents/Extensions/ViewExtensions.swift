@@ -8,6 +8,13 @@
 import SwiftUI
 
 public extension View {
+    func configure(_ configuration: @escaping (Self) -> Void) -> Self {
+        configuration(self)
+        return self
+    }
+}
+
+public extension View {
     func rainbowAnimation() -> some View {
         self.modifier(RainbowAnimation())
     }
