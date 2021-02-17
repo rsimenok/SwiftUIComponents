@@ -16,7 +16,7 @@ public protocol StringFilterable: CustomStringConvertible, Hashable {
 public struct FilteredList<Element: StringFilterable,
                            Content: View>: View {
     
-    let title: String
+    let title: String?
     let list: [Element]
     @State var filter: String = ""
     @State var filteredList: [Element] = []
@@ -75,7 +75,7 @@ public struct FilteredList<Element: StringFilterable,
                     .onDelete(perform: onDelete)
                 }
             }
-            .navigationBarTitle(title)
+            .navigationBarTitle(title ?? "")
         }
         .onAppear {
             self.filteredList = list
