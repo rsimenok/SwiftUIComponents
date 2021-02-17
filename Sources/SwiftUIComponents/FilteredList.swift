@@ -16,7 +16,7 @@ public protocol StringFilterable: CustomStringConvertible, Hashable {
 public struct FilteredList<Element: StringFilterable,
                            Content: View>: View {
     
-    let title: (Element) -> String
+    let title: String?
     let list: [Element]
     @State var filter: String = ""
     @State var filteredList: [Element] = []
@@ -70,10 +70,7 @@ public struct FilteredList<Element: StringFilterable,
                 } else {
                     ForEach(filteredList,
                             id:\.self.filter) { element in
-                        if #available(iOS 14.0, *) {
-                            content(element)
-                                .navigationTitle(title(element))
-                        }
+                        content(element)
                     }
                     .onDelete(perform: onDelete)
                 }
@@ -84,7 +81,7 @@ public struct FilteredList<Element: StringFilterable,
         }
     }
     
-    public init(_ title: @escaping (Element) -> String = {_ in ""},
+    public init(_ title: String = "",
                 list: [Element],
                 selection: Set<Element> = Set<Element>(),
                 @ViewBuilder content: @escaping (Element) -> Content) {
