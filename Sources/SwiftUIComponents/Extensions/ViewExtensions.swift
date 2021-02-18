@@ -239,7 +239,9 @@ public extension View {
     }
 }
 
-public struct Mirror: ViewModifier {
+public struct Reflection: ViewModifier {
+    
+    var direction: ReflectDirection
     
     public func body(content: Content) -> some View {
             ZStack {
@@ -252,17 +254,39 @@ public struct Mirror: ViewModifier {
                             startPoint: .top,
                             endPoint: .bottom)
                     )
-                    .offset(CGSize(width: 0, height: -geometry.size.height))
-                    .rotationEffect(.degrees(180))
-
+                    .offset(getOffset(geometry: geometry))
+                    .rotationEffect(getRotation())
             }
         }
     }
+    
+    func getOffset(geometry: GeometryProxy) -> CGSize {
+        switch direction {
+        case .bottom:
+            return CGSize(width: 0, height: -geometry.size.height)
+        case .top:
+            return CGSize(width: 0, height: geometry.size.height)
+        }
+    }
+    
+    func getRotation() -> Angle {
+        switch direction {
+        case .bottom: return .degrees(180)
+        case .top: return .degrees(0)
+        }
+        
+    }
+}
+
+public enum ReflectDirection {
+    case bottom
+    case top
 }
 
 public extension View {
     
-    func mirror() -> some View {
-        self.modifier(Mirror())
+
+    func reflect(reflectDirection: ReflectDirection = .top) -> some View {
+        self.modifier(Reflection(direction: reflectDirection))
     }
 }
