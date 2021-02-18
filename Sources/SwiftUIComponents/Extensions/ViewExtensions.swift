@@ -267,7 +267,7 @@ public struct Reflection: ViewModifier {
     }
     public func body(content: Content) -> some View {
             ZStack {
-                content
+                // reflection
                 GeometryReader { geometry in
                 content
                     .mask(
@@ -279,6 +279,8 @@ public struct Reflection: ViewModifier {
                     .offset(getOffset(geometry: geometry))
                     .rotationEffect(rotation)
             }
+                // original content
+                content
         }
     }
     
