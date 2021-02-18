@@ -244,7 +244,7 @@ public struct Reflection: ViewModifier {
     var rotation: Angle {
         switch direction {
         case .bottom: return .degrees(180)
-        case .top: return .degrees(0)
+        case .top: return .degrees(180)
         }
     }
     var gradientColors:[Color] {
@@ -287,7 +287,7 @@ public struct Reflection: ViewModifier {
         case .bottom:
             return CGSize(width: 0, height: -geometry.size.height)
         case .top:
-            return CGSize(width: 0, height: geometry.size.height)
+            return CGSize(width: 0, height: -geometry.size.height)
         }
     }
 }
