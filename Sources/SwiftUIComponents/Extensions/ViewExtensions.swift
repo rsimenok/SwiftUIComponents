@@ -253,7 +253,18 @@ public struct Reflection: ViewModifier {
         case .top: return [.clear, Color.white.opacity(0.2)]
         }
     }
-    
+    var startPoint: UnitPoint {
+        switch direction {
+        case .top: return .bottom
+        case .bottom: return .top
+        }
+    }
+    var endPoint: UnitPoint {
+        switch direction {
+        case .top: return .top
+        case .bottom: return .bottom
+        }
+    }
     public func body(content: Content) -> some View {
             ZStack {
                 content
@@ -262,8 +273,8 @@ public struct Reflection: ViewModifier {
                     .mask(
                         LinearGradient(
                             gradient:  Gradient(colors: gradientColors),
-                            startPoint: .top,
-                            endPoint: .bottom)
+                            startPoint: startPoint,
+                            endPoint: endPoint)
                     )
                     .offset(getOffset(geometry: geometry))
                     .rotationEffect(rotation)
