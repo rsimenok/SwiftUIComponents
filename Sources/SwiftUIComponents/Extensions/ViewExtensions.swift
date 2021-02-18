@@ -287,7 +287,7 @@ public struct Reflection: ViewModifier {
         case .bottom:
             return CGSize(width: 0, height: -geometry.size.height)
         case .top:
-            return CGSize(width: 0, height: -geometry.size.height)
+            return CGSize(width: 0, height: geometry.size.height)
         }
     }
 }
