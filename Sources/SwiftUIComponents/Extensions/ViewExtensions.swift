@@ -285,7 +285,7 @@ public struct Reflection: ViewModifier {
     func getOffset(geometry: GeometryProxy) -> CGSize {
         switch direction {
         case .bottom:
-            return CGSize(width: 0, height: geometry.size.height)
+            return CGSize(width: 0, height: -geometry.size.height)
         case .top:
             return CGSize(width: 0, height: geometry.size.height)
         }
