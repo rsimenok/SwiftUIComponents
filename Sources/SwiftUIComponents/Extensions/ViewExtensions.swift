@@ -219,7 +219,6 @@ public struct PopUp<PopUpContent: View>: ViewModifier {
         
     }
     
-    
     public init(isPresented: Binding<Bool>,
                 onDismiss: (() -> Void)? = nil,
                 @ViewBuilder popUpContent: @escaping () -> PopUpContent) {
@@ -275,7 +274,7 @@ public struct Reflection: ViewModifier {
     func getOffset(geometry: GeometryProxy) -> CGSize {
         switch direction {
         case .bottom:
-            return CGSize(width: 0, height: -geometry.size.height)
+            return CGSize(width: 0, height: geometry.size.height)
         case .top:
             return CGSize(width: 0, height: geometry.size.height)
         }
@@ -289,7 +288,6 @@ public enum ReflectDirection {
 
 public extension View {
     
-
     func reflect(direction: ReflectDirection = .top) -> some View {
         self.modifier(Reflection(direction: direction))
     }
