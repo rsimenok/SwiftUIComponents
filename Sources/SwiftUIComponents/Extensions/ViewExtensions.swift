@@ -242,12 +242,19 @@ public extension View {
 public struct Mirror: ViewModifier {
     
     public func body(content: Content) -> some View {
-        VStack {
-            GeometryReader { geometry in
+            ZStack {
                 content
+                GeometryReader { geometry in
                 content
-                    .offset(CGSize(width: 0, height: geometry.size.height))
+                    .mask(
+                        LinearGradient(
+                            gradient:  Gradient(colors: [.clear, Color.white.opacity(0.2)]),
+                            startPoint: .top,
+                            endPoint: .bottom)
+                    )
+                    .offset(CGSize(width: 0, height: -geometry.size.height))
                     .rotationEffect(.degrees(180))
+
             }
         }
     }
