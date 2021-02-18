@@ -286,7 +286,7 @@ public enum ReflectDirection {
 public extension View {
     
 
-    func reflect(reflectDirection: ReflectDirection = .top) -> some View {
-        self.modifier(Reflection(direction: reflectDirection))
+    func reflect(direction: ReflectDirection = .top) -> some View {
+        self.modifier(Reflection(direction: direction))
     }
 }
