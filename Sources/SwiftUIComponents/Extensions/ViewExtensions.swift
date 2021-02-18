@@ -250,7 +250,7 @@ public struct Reflection: ViewModifier {
     var gradientColors:[Color] {
         switch direction {
         case .bottom: return [.clear, Color.white.opacity(0.2)]
-        case .top: return [Color.white.opacity(0.2), .clear]
+        case .top: return [.clear, Color.white.opacity(0.2)]
         }
     }
     
