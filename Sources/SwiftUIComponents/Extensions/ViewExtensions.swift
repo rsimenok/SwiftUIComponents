@@ -242,6 +242,18 @@ public extension View {
 public struct Reflection: ViewModifier {
     
     var direction: ReflectDirection
+    var rotation: Angle {
+        switch direction {
+        case .bottom: return .degrees(180)
+        case .top: return .degrees(0)
+        }
+    }
+    var gradientColors:[Color] {
+        switch direction {
+        case .bottom: return [.clear, Color.white.opacity(0.2)]
+        case .top: return [Color.white.opacity(0.2), .clear]
+        }
+    }
     
     public func body(content: Content) -> some View {
             ZStack {
@@ -250,12 +262,12 @@ public struct Reflection: ViewModifier {
                 content
                     .mask(
                         LinearGradient(
-                            gradient:  Gradient(colors: [.clear, Color.white.opacity(0.2)]),
+                            gradient:  Gradient(colors: gradientColors),
                             startPoint: .top,
                             endPoint: .bottom)
                     )
                     .offset(getOffset(geometry: geometry))
-                    .rotationEffect(getRotation())
+                    .rotationEffect(rotation)
             }
         }
     }
@@ -267,14 +279,6 @@ public struct Reflection: ViewModifier {
         case .top:
             return CGSize(width: 0, height: geometry.size.height)
         }
-    }
-    
-    func getRotation() -> Angle {
-        switch direction {
-        case .bottom: return .degrees(180)
-        case .top: return .degrees(0)
-        }
-        
     }
 }
 
