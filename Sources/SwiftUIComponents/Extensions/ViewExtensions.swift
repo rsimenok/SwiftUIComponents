@@ -238,3 +238,24 @@ public extension View {
         self.modifier(PopUp(isPresented: isPresented, onDismiss: onDismiss, popUpContent: content))
     }
 }
+
+public struct Mirror: ViewModifier {
+    
+    public func body(content: Content) -> some View {
+        VStack {
+            GeometryReader { geometry in
+                content
+                content
+                    .offset(CGSize(width: 0, height: geometry.size.height))
+                    .rotationEffect(.degrees(180))
+            }
+        }
+    }
+}
+
+public extension View {
+    
+    func mirror() -> some View {
+        self.modifier(Mirror())
+    }
+}
