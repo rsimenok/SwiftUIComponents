@@ -65,6 +65,7 @@ public struct FilteredList<Element: StringFilterable,
             
             Divider()
             
+            #if !os(watchOS)
             List(selection: $selection) {
                 if filteredList.isEmpty {
                     Text("Nothing to show")
@@ -77,6 +78,20 @@ public struct FilteredList<Element: StringFilterable,
                 }
             }
             .navigationBarTitle(title ?? "")
+            #elseif os(watchOS)
+            List {
+                if filteredList.isEmpty {
+                    Text("Nothing to show")
+                } else {
+                    ForEach(filteredList,
+                            id:\.self.filter) { element in
+                        content(element)
+                    }
+                    .onDelete(perform: onDelete)
+                }
+            }
+            .navigationBarTitle(title ?? "")
+            #endif
         }
         .onAppear {
             self.filteredList = list

@@ -128,8 +128,10 @@ public struct PagesView<Content: View>: View {
     private func update(selectingState: Bool) {
         if selectingState != isSelecting {
             isSelecting = selectingState
+            #if !os(watchOS)
             UIImpactFeedbackGenerator().impactOccurred(intensity: .infinity)
             AudioServicesPlaySystemSound(UInt32(1104))
+            #endif
         }
     }
     

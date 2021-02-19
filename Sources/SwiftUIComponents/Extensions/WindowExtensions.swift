@@ -5,7 +5,7 @@
 //  Created by Moi Gutierrez on 7/31/20.
 //
 
-#if !os(macOS)
+#if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
 
 import UIKit
 
