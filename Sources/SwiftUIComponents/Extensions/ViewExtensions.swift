@@ -245,24 +245,32 @@ public struct Reflection: ViewModifier {
         switch direction {
         case .bottom: return .degrees(180)
         case .top: return .degrees(180)
+        case .leading: return .degrees(180)
+        case .trailing: return .degrees(180)
         }
     }
     var gradientColors:[Color] {
         switch direction {
         case .bottom: return [.clear, Color.white.opacity(0.2)]
         case .top: return [.clear, Color.white.opacity(0.2)]
+        case .leading: return [.clear, Color.white.opacity(0.2)]
+        case .trailing: return [Color.white.opacity(0.2), .clear]
         }
     }
     var startPoint: UnitPoint {
         switch direction {
         case .top: return .bottom
         case .bottom: return .top
+        case .leading: return .top
+        case .trailing: return .top
         }
     }
     var endPoint: UnitPoint {
         switch direction {
         case .top: return .top
         case .bottom: return .bottom
+        case .leading: return .bottom
+        case .trailing: return .bottom
         }
     }
     public func body(content: Content) -> some View {
@@ -286,10 +294,10 @@ public struct Reflection: ViewModifier {
     
     func getOffset(geometry: GeometryProxy) -> CGSize {
         switch direction {
-        case .bottom:
-            return CGSize(width: 0, height: -geometry.size.height)
-        case .top:
-            return CGSize(width: 0, height: geometry.size.height)
+        case .bottom: return CGSize(width: 0, height: -geometry.size.height)
+        case .top: return CGSize(width: 0, height: geometry.size.height)
+        case .leading: return CGSize(width: -geometry.size.width, height: 0)
+        case .trailing: return CGSize(width: geometry.size.width, height: 0)
         }
     }
 }
@@ -297,6 +305,8 @@ public struct Reflection: ViewModifier {
 public enum ReflectDirection {
     case bottom
     case top
+    case leading
+    case trailing
 }
 
 public extension View {
