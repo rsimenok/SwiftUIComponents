@@ -242,27 +242,18 @@ public struct Reflection: ViewModifier {
     
     var direction: ReflectDirection
     var rotation: Angle {
-        switch direction {
-        case .bottom: return .degrees(180)
-        case .top: return .degrees(180)
-        case .leading: return .degrees(0)
-        case .trailing: return .degrees(0)
-        }
+        .degrees(180)
     }
     var gradientColors:[Color] {
-        switch direction {
-        case .bottom: return [.clear, Color.white.opacity(0.2)]
-        case .top: return [.clear, Color.white.opacity(0.2)]
-        case .leading: return [.clear, Color.white.opacity(0.2)]
-        case .trailing: return [Color.white.opacity(0.2), .clear]
-        }
+        [.clear, Color.white.opacity(0.1)]
     }
+    
     var startPoint: UnitPoint {
         switch direction {
         case .top: return .bottom
         case .bottom: return .top
-        case .leading: return .leading
-        case .trailing: return .trailing
+        case .leading: return .trailing
+        case .trailing: return .leading
         }
     }
     var endPoint: UnitPoint {
@@ -273,6 +264,25 @@ public struct Reflection: ViewModifier {
         case .trailing: return .trailing
         }
     }
+    
+    var rotationAlongY: CGFloat {
+        switch direction {
+        case .top: return 0
+        case .bottom: return 0
+        case .leading: return 1
+        case .trailing: return 1
+        }
+    }
+    
+    var rotationAlongX: CGFloat {
+        switch direction {
+        case .top: return 1
+        case .bottom: return 1
+        case .leading: return 0
+        case .trailing: return 0
+        }
+    }
+    
     public func body(content: Content) -> some View {
             ZStack {
                 // reflection
@@ -284,8 +294,8 @@ public struct Reflection: ViewModifier {
                             startPoint: startPoint,
                             endPoint: endPoint)
                     )
+                    .rotation3DEffect(rotation, axis: (x: rotationAlongX, y: rotationAlongY, z: 0))
                     .offset(getOffset(geometry: geometry))
-                    .rotationEffect(rotation)
             }
                 // original content
                 content
@@ -294,19 +304,25 @@ public struct Reflection: ViewModifier {
     
     func getOffset(geometry: GeometryProxy) -> CGSize {
         switch direction {
-        case .bottom: return CGSize(width: 0, height: -geometry.size.height)
-        case .top: return CGSize(width: 0, height: geometry.size.height)
+        case .bottom: return CGSize(width: 0, height: geometry.size.height)
+        case .top: return CGSize(width: 0, height: -geometry.size.height)
         case .leading: return CGSize(width: -geometry.size.width, height: 0)
         case .trailing: return CGSize(width: geometry.size.width, height: 0)
         }
     }
 }
 
-public enum ReflectDirection {
+public enum ReflectDirection: CaseIterable {
     case bottom
     case top
     case leading
     case trailing
+    
+    mutating func next() -> ReflectDirection {
+        let a = type(of: self).allCases
+        return a[(a.firstIndex(of: self)! + 1) % a.count]
+    }
+
 }
 
 public extension View {
@@ -315,3 +331,4 @@ public extension View {
         self.modifier(Reflection(direction: direction))
     }
 }
+
