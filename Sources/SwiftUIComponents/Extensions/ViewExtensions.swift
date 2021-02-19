@@ -245,8 +245,8 @@ public struct Reflection: ViewModifier {
         switch direction {
         case .bottom: return .degrees(180)
         case .top: return .degrees(180)
-        case .leading: return .degrees(180)
-        case .trailing: return .degrees(180)
+        case .leading: return .degrees(0)
+        case .trailing: return .degrees(0)
         }
     }
     var gradientColors:[Color] {
