@@ -261,16 +261,16 @@ public struct Reflection: ViewModifier {
         switch direction {
         case .top: return .bottom
         case .bottom: return .top
-        case .leading: return .top
-        case .trailing: return .top
+        case .leading: return .leading
+        case .trailing: return .trailing
         }
     }
     var endPoint: UnitPoint {
         switch direction {
         case .top: return .top
         case .bottom: return .bottom
-        case .leading: return .bottom
-        case .trailing: return .bottom
+        case .leading: return .leading
+        case .trailing: return .trailing
         }
     }
     public func body(content: Content) -> some View {
