@@ -318,11 +318,15 @@ public enum ReflectDirection: CaseIterable {
     case leading
     case trailing
     
-    mutating func next() -> ReflectDirection {
+    public mutating func next() {
+        let a = type(of: self).allCases
+        self = a[(a.firstIndex(of: self)! + 1) % a.count]
+    }
+
+    public func next() -> ReflectDirection {
         let a = type(of: self).allCases
         return a[(a.firstIndex(of: self)! + 1) % a.count]
     }
-
 }
 
 public extension View {
