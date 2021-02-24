@@ -30,7 +30,7 @@ public struct FilteredList<Element: StringFilterable,
             set: { text in
                 
                 self.filter = text
-                print("filter: \(filter)")
+                // print("filter: \(filter)")
                 
                 if filter.isEmpty {
                     filteredList = list
@@ -44,7 +44,7 @@ public struct FilteredList<Element: StringFilterable,
                         $0.description < $1.description
                     }
                 }
-                print("filtered count: \(filteredList.count)")
+                // print("filtered count: \(filteredList.count)")
             }
         )
         
