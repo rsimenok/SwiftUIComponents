@@ -8,6 +8,8 @@
 import SwiftUI
 import AVFoundation
 
+#if !os(tvOS)
+
 public struct PagesView<Content: View>: View {
 
     public enum SelectionDirection {
@@ -142,3 +144,4 @@ public struct PagesView<Content: View>: View {
         return percentage
     }
 }
+#endif
