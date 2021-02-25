@@ -12,7 +12,7 @@ import UIKit
 
 import Utilities
 
-struct PageView<Page: View>: UIViewControllerRepresentable {
+public struct PageView<Page: View>: UIViewControllerRepresentable {
     
     var pages: [Page]
     @Binding var currentPage: Int
@@ -29,7 +29,7 @@ struct PageView<Page: View>: UIViewControllerRepresentable {
         self.navigationOrientation = navigationOrientation
     }
     
-    func makeUIViewController(context: Context) -> UIPageViewController {
+    public func makeUIViewController(context: Context) -> UIPageViewController {
         let pageViewController = UIPageViewController(transitionStyle: transitionStyle, navigationOrientation: navigationOrientation, options: nil)
         
         pageViewController.dataSource = context.coordinator
@@ -38,7 +38,7 @@ struct PageView<Page: View>: UIViewControllerRepresentable {
         return pageViewController
     }
     
-    func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
+    public func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
         var direction: UIPageViewController.NavigationDirection = .forward
         var animated: Bool = false
         
@@ -52,11 +52,11 @@ struct PageView<Page: View>: UIViewControllerRepresentable {
         pageViewController.setViewControllers([currentViewController], direction: direction, animated: animated)
     }
     
-    func makeCoordinator() -> Coordinator {
+    public func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self, pages: pages)
     }
     
-    class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    public class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         
         var parent: PageView
         var controllers: [UIViewController]
@@ -70,7 +70,7 @@ struct PageView<Page: View>: UIViewControllerRepresentable {
             })
         }
         
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
             guard let index = controllers.firstIndex(of: viewController) else {
                 return nil
             }
@@ -80,7 +80,7 @@ struct PageView<Page: View>: UIViewControllerRepresentable {
             return controllers[safe: index - 1]
         }
         
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
             guard let index = controllers.firstIndex(of: viewController) else {
                 return nil
             }
@@ -90,7 +90,7 @@ struct PageView<Page: View>: UIViewControllerRepresentable {
             return controllers[safe: index + 1]
         }
         
-        func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
             if completed,
                 let currentViewController = pageViewController.viewControllers?.first,
                 let currentIndex = controllers.firstIndex(of: currentViewController)
