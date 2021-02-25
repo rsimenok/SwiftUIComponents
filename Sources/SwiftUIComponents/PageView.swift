@@ -14,19 +14,22 @@ import Utilities
 
 public struct PageView<Page: View>: UIViewControllerRepresentable {
     
-    var pages: [Page]
+    var pageCount: Int
     @Binding var currentPage: Int
     var transitionStyle: UIPageViewController.TransitionStyle
     var navigationOrientation: UIPageViewController.NavigationOrientation
-    
-    public init(pages: [Page],
+    var content: (Int) -> Page
+
+    public init(pageCount: Int,
                 currentPage: Binding<Int>,
                 transitionStyle: UIPageViewController.TransitionStyle = .scroll,
-                navigationOrientation: UIPageViewController.NavigationOrientation = .horizontal) {
-        self.pages = pages
+                navigationOrientation: UIPageViewController.NavigationOrientation = .horizontal,
+                @ViewBuilder content: @escaping (_ index: Int) -> Page) {
+        self.pageCount = pageCount
         self._currentPage = currentPage
         self.transitionStyle = transitionStyle
         self.navigationOrientation = navigationOrientation
+        self.content = content
     }
     
     public func makeUIViewController(context: Context) -> UIPageViewController {
@@ -53,21 +56,23 @@ public struct PageView<Page: View>: UIViewControllerRepresentable {
     }
     
     public func makeCoordinator() -> Coordinator {
-        return Coordinator(parent: self, pages: pages)
+        return Coordinator(parent: self, pageCount: pageCount, content: content)
     }
     
     public class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         
         var parent: PageView
-        var controllers: [UIViewController]
+        var controllers: [UIViewController] = []
 
-        init(parent: PageView, pages: [Page]) {
+        init(parent: PageView,
+             pageCount: Int,
+             @ViewBuilder content: @escaping (_ index: Int) -> Page) {
             self.parent = parent
-            self.controllers = pages.map({
-                let hostingController = UIHostingController(rootView: $0)
+            for currentPage in 0..<pageCount {
+                let hostingController = UIHostingController(rootView: content(currentPage))
                 hostingController.view.backgroundColor = .clear
-                return hostingController
-            })
+                self.controllers.append(hostingController)
+            }
         }
         
         public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
