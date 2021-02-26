@@ -51,7 +51,10 @@ public struct PageView<Page: View>: UIViewControllerRepresentable {
             animated = (currentPage != previousPage)
         }
         
-        let currentViewController = context.coordinator.controllers[currentPage]
+        guard let currentViewController = context.coordinator.controllers[safe:currentPage] else {
+            pageViewController.setViewControllers([], direction: direction, animated: animated)
+            return
+        }
         pageViewController.setViewControllers([currentViewController], direction: direction, animated: animated)
     }
     
