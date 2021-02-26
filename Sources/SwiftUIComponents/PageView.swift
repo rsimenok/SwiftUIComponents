@@ -14,18 +14,18 @@ import Utilities
 
 public struct PageView<Page: View>: UIViewControllerRepresentable {
     
-    var pageCount: Int
+    @Binding var pageCount: Int
     @Binding var currentPage: Int
     var transitionStyle: UIPageViewController.TransitionStyle
     var navigationOrientation: UIPageViewController.NavigationOrientation
     var content: (Int) -> Page
 
-    public init(pageCount: Int,
+    public init(pageCount: Binding<Int>,
                 currentPage: Binding<Int>,
                 transitionStyle: UIPageViewController.TransitionStyle = .scroll,
                 navigationOrientation: UIPageViewController.NavigationOrientation = .horizontal,
                 @ViewBuilder content: @escaping (_ index: Int) -> Page) {
-        self.pageCount = pageCount
+        self._pageCount = pageCount
         self._currentPage = currentPage
         self.transitionStyle = transitionStyle
         self.navigationOrientation = navigationOrientation
