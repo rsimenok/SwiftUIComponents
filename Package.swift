@@ -23,7 +23,7 @@ let package = Package(
         .package(name: "SwiftUtilities", url: "https://github.com/moyoteg/SwiftUtilities", .branch("master")),
         
         // 3rd party
-        .package(url: "https://github.com/devicekit/DeviceKit.git", from: "4.2.1"),
+        .package(name: "DeviceKit", url: "https://github.com/devicekit/DeviceKit.git", from: "4.2.1"),
 
         
     ],
@@ -34,6 +34,9 @@ let package = Package(
             name: "SwiftUIComponents",
             dependencies: [
                 "SwiftUtilities",
+                
+                // 3rd Party
+                "DeviceKit"
             ]),
         .testTarget(
             name: "SwiftUIComponentsTests",
