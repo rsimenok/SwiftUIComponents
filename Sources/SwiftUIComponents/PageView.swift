@@ -10,7 +10,7 @@ import UIKit
 
 #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
 
-import Utilities
+import SwiftUtilities
 
 public struct PageView<Page: View>: UIViewControllerRepresentable {
     

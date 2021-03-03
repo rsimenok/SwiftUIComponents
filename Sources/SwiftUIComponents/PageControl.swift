@@ -1,6 +1,6 @@
 //
 //  PageControl.swift
-//  PagesView
+//  SwiftUIComponents
 //
 //  Created by Moi Gutierrez on 12/12/20.
 //

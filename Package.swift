@@ -20,7 +20,10 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "Utilities", url: "https://github.com/moyoteg/SwiftUtilities", .branch("master")),
+        .package(name: "SwiftUtilities", url: "https://github.com/moyoteg/SwiftUtilities", .branch("master")),
+        
+        // 3rd party
+        .package(url: "https://github.com/devicekit/DeviceKit.git", from: "4.2.1"),
 
         
     ],
@@ -30,7 +33,7 @@ let package = Package(
         .target(
             name: "SwiftUIComponents",
             dependencies: [
-                "Utilities",
+                "SwiftUtilities",
             ]),
         .testTarget(
             name: "SwiftUIComponentsTests",

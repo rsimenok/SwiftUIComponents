@@ -1,6 +1,6 @@
 //
 //  FullScreenModalView.swift
-//  PragMenu
+//  SwiftUIComponents
 //
 //  Created by Moi Gutierrez on 1/17/21.
 //  Copyright © 2021 PragCore. All rights reserved.

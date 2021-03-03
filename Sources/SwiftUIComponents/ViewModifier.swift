@@ -1,6 +1,6 @@
 //
 //  ViewModifier.swift
-//  PragMenu
+//  SwiftUIComponents
 //
 //  Created by Moi Gutierrez on 1/21/21.
 //  Copyright © 2021 PragCore. All rights reserved.
