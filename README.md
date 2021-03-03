@@ -18,7 +18,7 @@ import PackageDescription
 let package = Package(
   name: "YourProject",
   dependencies: [
-        .package(name: "Models", url: "https://github.com/moyoteg/SwiftUIComponents", .branch("master")),
+        .package(name: "Models", url: "https://github.com/moyoteg/SwiftUIComponents", .branch("main")),
   ]
 )
 ```
