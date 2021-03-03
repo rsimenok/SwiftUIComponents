@@ -5,10 +5,8 @@
 //  Created by Moi Gutierrez on 10/15/20.
 //
 
-import Foundation
-import UIKit
-
 #if !os(tvOS)
+import UIKit
 import DeviceKit
 
 public extension UIDevice {

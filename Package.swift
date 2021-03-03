@@ -36,7 +36,7 @@ let package = Package(
                 "SwiftUtilities",
                 
                 // 3rd Party
-                "DeviceKit"
+                "DeviceKit",
             ]),
         .testTarget(
             name: "SwiftUIComponentsTests",
