@@ -13,6 +13,12 @@ public protocol StringFilterable: CustomStringConvertible, Hashable {
     var filter: String { get }
 }
 
+extension String: StringFilterable {
+    public var filter: String {
+        self
+    }
+}
+
 public struct FilteredList<Element: StringFilterable,
                            Content: View>: View {
     
