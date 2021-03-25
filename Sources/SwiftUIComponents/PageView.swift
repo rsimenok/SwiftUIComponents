@@ -16,17 +16,21 @@ public struct PageView<Page: View>: UIViewControllerRepresentable {
     
     @Binding var pageCount: Int
     @Binding var currentPage: Int
+    @Binding var isSelecting: Bool
+
     var transitionStyle: UIPageViewController.TransitionStyle
     var navigationOrientation: UIPageViewController.NavigationOrientation
     var content: (Int) -> Page
 
     public init(pageCount: Binding<Int>,
                 currentPage: Binding<Int>,
+                isSelecting: Binding<Bool>,
                 transitionStyle: UIPageViewController.TransitionStyle = .scroll,
                 navigationOrientation: UIPageViewController.NavigationOrientation = .horizontal,
                 @ViewBuilder content: @escaping (_ index: Int) -> Page) {
         self._pageCount = pageCount
         self._currentPage = currentPage
+        self._isSelecting = isSelecting
         self.transitionStyle = transitionStyle
         self.navigationOrientation = navigationOrientation
         self.content = content
@@ -59,18 +63,21 @@ public struct PageView<Page: View>: UIViewControllerRepresentable {
     }
     
     public func makeCoordinator() -> Coordinator {
-        return Coordinator(parent: self, pageCount: pageCount, content: content)
+        return Coordinator(parent: self, pageCount: pageCount, isSelecting: $isSelecting, content: content)
     }
     
     public class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         
         var parent: PageView
         var controllers: [UIViewController] = []
+        @Binding var isSelecting: Bool
 
         init(parent: PageView,
              pageCount: Int,
+             isSelecting: Binding<Bool>,
              @ViewBuilder content: @escaping (_ index: Int) -> Page) {
             self.parent = parent
+            self._isSelecting = isSelecting
             for currentPage in 0..<pageCount {
                 let hostingController = UIHostingController(rootView: content(currentPage))
                 hostingController.view.backgroundColor = .clear
@@ -98,12 +105,17 @@ public struct PageView<Page: View>: UIViewControllerRepresentable {
             return controllers[safe: index + 1]
         }
         
+        public func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+            isSelecting = true
+        }
+        
         public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
             if completed,
                 let currentViewController = pageViewController.viewControllers?.first,
                 let currentIndex = controllers.firstIndex(of: currentViewController)
             {
                 parent.currentPage = currentIndex
+                isSelecting = false
             }
         }
     }
