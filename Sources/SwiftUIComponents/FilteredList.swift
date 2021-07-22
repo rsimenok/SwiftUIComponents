@@ -24,11 +24,11 @@ public struct FilteredList<Element: StringFilterable,
     
     let title: String?
     let list: [Element]
-    @State var filter: String = ""
-    @State var filteredList: [Element] = []
+    @State private var filter: String = ""
+    @State private var filteredList: [Element] = []
     var content: (Element) -> Content
     var onDelete: (((IndexSet) -> Void)?)
-    @State var selection = Set<Element>()
+    @State private var selection = Set<Element>()
     
     public var body: some View {
         let binding = Binding(

@@ -22,7 +22,7 @@ public extension View {
 
 public struct RainbowAnimation: ViewModifier {
     // 1
-    @State var isOn: Bool = false
+    @State private var isOn: Bool = false
     let hueColors = stride(from: 0, to: 1, by: 0.01).map {
         Color(hue: $0, saturation: 1, brightness: 1)
     }
