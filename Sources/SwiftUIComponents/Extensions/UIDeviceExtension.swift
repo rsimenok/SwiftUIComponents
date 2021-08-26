@@ -17,7 +17,7 @@ public extension UIDevice {
     
     /// pares the deveice name as the standard name
     static var modelName: String {
-        return "\(UIDevice.model)"
+        return "\(Device.current.description)"
     }
     
 }
