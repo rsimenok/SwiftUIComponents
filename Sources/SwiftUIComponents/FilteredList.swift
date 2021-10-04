@@ -57,10 +57,15 @@ public struct FilteredList<Element: StringFilterable,
         return VStack {
             HStack {
                 Image(systemName: "magnifyingglass")
-                Text("(\(filter.isEmpty ? "\(list.count)":"\(filteredList.count)"))")
                 TextField("filter", text: binding.animation(.spring()))
                     .padding([.top, .bottom], 8)
                     .modifier(Modifier.ClearButton(text: binding))
+                    .scaledToFill()
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
+                Spacer()
+                Text("(\(filter.isEmpty ? "\(list.count)":"\(filteredList.count)"))")
+                    .font(.system(.caption))
             }
             .padding([.leading, .trailing], 16)
             .background(
