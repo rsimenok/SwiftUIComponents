@@ -62,7 +62,6 @@ public struct FilteredList<Element: StringFilterable,
                 TextField("filter", text: binding.animation(.spring()))
                     .padding([.top, .bottom], 8)
                     .modifier(Modifier.ClearButton(text: binding))
-                    .scaledToFill()
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
             }
