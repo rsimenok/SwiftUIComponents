@@ -8,10 +8,10 @@
 import SwiftUI
 import WebKit
 
-struct HTMLView: View {
+public struct HTMLView: View {
     @Binding var htmlText: String
     
-    var body: some View {
+    public var body: some View {
         WebView(text: $htmlText)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
     }
