@@ -15,6 +15,10 @@ public struct HTMLView: View {
         WebView(text: $htmlText)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
     }
+    
+    public init(htmlText: Binding<String>) {
+        self._htmlText = htmlText
+    }
 }
 
 struct WebView: UIViewRepresentable {
