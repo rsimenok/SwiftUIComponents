@@ -12,9 +12,7 @@ import LocalAuthentication
 import SwiftUtilities
 
 public struct BiometricType: View {
-    
-//    var biometricType: LAContext.BiometricType
-    
+        
     var image: Image {
         
         let biometricType = LAContext().biometryType
