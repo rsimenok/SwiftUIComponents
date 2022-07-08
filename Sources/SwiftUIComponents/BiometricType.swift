@@ -15,7 +15,7 @@ public struct BiometricType: View {
 
     static let biometricType = LAContext().biometryType
 
-    var image: Image {
+    public var image: Image {
                 
         switch BiometricType.biometricType {
         case .none: return SwiftUI.Image(systemName: "circle.slash")
