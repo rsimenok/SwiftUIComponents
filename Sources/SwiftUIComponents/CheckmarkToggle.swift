@@ -17,6 +17,7 @@ public struct CheckmarkToggle: View {
             isChecked.toggle()
         }) {
             Image(systemName: isChecked ? "checkmark.square" : "square")
+                .font(.system(size: 44, weight: .light))
         }
     }
     
