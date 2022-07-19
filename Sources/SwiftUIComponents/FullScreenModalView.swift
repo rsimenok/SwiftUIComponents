@@ -9,19 +9,6 @@
 import Foundation
 import SwiftUI
 
-public struct FullScreenModalView: View {
-    @Environment(\.presentationMode) var presentationMode
-
-    public var body: some View {
-        VStack {
-            Text("This is a modal view")
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.red)
-        .edgesIgnoringSafeArea(.all)
-    }
-}
-
 #if os(tvOS)
 public struct FullScreenModalView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -36,6 +23,19 @@ public struct FullScreenModalView: View {
         .onExitCommand(perform: {
             presentationMode.wrappedValue.dismiss()
         })
+    }
+}
+#else
+public struct FullScreenModalView: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    public var body: some View {
+        VStack {
+            Text("This is a modal view")
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.red)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 #endif

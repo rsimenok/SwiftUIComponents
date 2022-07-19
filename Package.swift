@@ -24,7 +24,7 @@ let package = Package(
         
         // 3rd party
         .package(name: "DeviceKit", url: "https://github.com/devicekit/DeviceKit.git", .upToNextMajor(from: "4.2.1")),
-        .package(name: "SwiftUICharts", url: "https://github.com/AppPear/ChartView", .upToNextMajor(from: "1.0.0")),
+        .package(name: "SwiftUICharts", url: "https://github.com/AppPear/ChartView", .upToNextMajor(from: "1.5.5")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -32,13 +32,16 @@ let package = Package(
         .target(
             name: "SwiftUIComponents",
             dependencies: [
-                "SwiftUtilities",
+                .product(name: "SwiftUtilities", package: "SwiftUtilities"),
                 // 3rd Party
-                "DeviceKit",
-                "SwiftUICharts",
-            ]),
-        .testTarget(
-            name: "SwiftUIComponentsTests",
-            dependencies: ["SwiftUIComponents"]),
+                .product(name: "DeviceKit", package: "DeviceKit", condition: .when(platforms: [.iOS, .watchOS, .macCatalyst])),
+                .product(name: "SwiftUICharts", package: "SwiftUICharts", condition: .when(platforms: [.iOS, .macOS, .watchOS])),
+            ]
+        ),
+        
+            .testTarget(
+                name: "SwiftUIComponentsTests",
+                dependencies: ["SwiftUIComponents"]
+            ),
     ]
 )

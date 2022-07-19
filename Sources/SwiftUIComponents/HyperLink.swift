@@ -36,7 +36,9 @@ struct TextLabelWithHyperLink: UIViewRepresentable {
   func makeUIView(context: Context) -> UITextView {
     let textView = UITextView()
     textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-    textView.isEditable = false
+#if !os(tvOS)
+    textView.isEditable = false      
+#endif
     textView.isSelectable = true
     textView.tintColor = self.tintColor
     textView.delegate = context.coordinator

@@ -5,7 +5,9 @@
 //  Created by Moi Gutierrez on 10/15/20.
 //
 
+#if !os(tvOS)
 import UIKit
+
 import DeviceKit
 
 public extension UIDevice {
@@ -20,3 +22,4 @@ public extension UIDevice {
     }
     
 }
+#endif

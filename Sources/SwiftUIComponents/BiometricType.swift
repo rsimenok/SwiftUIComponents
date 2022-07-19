@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+#if !os(tvOS)
 import LocalAuthentication
 
 import SwiftUtilities
@@ -40,3 +41,4 @@ public struct BiometricType: View {
     
     public init() {}
 }
+#endif
