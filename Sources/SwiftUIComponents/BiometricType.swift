@@ -19,10 +19,10 @@ public struct BiometricType: View {
     public var image: Image {
                 
         switch BiometricType.biometricType {
-        case .none: return SwiftUI.Image(systemName: "circle.slash")
+        case .none: return SwiftUI.Image(systemName: "questionmark.app.dashed")
         case .touchID: return SwiftUI.Image(systemName: "touchid")
         case .faceID: return SwiftUI.Image(systemName: "faceid")
-        @unknown default: return SwiftUI.Image(systemName: "circle.slash")
+        @unknown default: return SwiftUI.Image(systemName: "questionmark.app.dashed")
         }
     }
     
