@@ -64,7 +64,7 @@ public struct FadeModifier: AnimatableModifier {
     public var animatableData: Double = 0.0
     
     // Re-created every time the control argument changes
-    init(control: Bool) {
+    public init(control: Bool) {
         // Set control to the new value
         self.control = control
         
@@ -336,3 +336,164 @@ public extension View {
     }
 }
 
+public extension View {
+    
+    @inlinable func reverseMask<Mask: View>(
+        alignment: Alignment = .center,
+        @ViewBuilder _ mask: () -> Mask
+    ) -> some View {
+        self.mask(
+            ZStack {
+                Rectangle()
+                
+                mask()
+                    .blendMode(.destinationOut)
+            }
+        )
+    }
+}
+
+// MARK: - LiquidHydrogen
+
+public extension View {
+    func liquidHydrogenAnimation() -> some View {
+        self.modifier(LiquidHydrogenAnimation())
+    }
+}
+
+public struct LiquidHydrogenAnimation: ViewModifier {
+    
+    @State private var isOn: Bool = false
+    
+    var rotationClockwise: Bool {
+        return Bool.random()
+    }
+    
+    let colorGradient = AngularGradient(gradient: Color.hydrogenGradient(), center: .center)
+    
+    var duration: Double = Double.random(min: 4.0, max: 5.0)
+    var animation: Animation {
+        Animation
+            .linear(duration: duration)
+            .repeatForever(autoreverses: false)
+    }
+    
+    public func body(content: Content) -> some View {
+        
+        let gradient = colorGradient
+        
+        return content.overlay(
+            
+            GeometryReader { proxy in
+                
+                Circle()
+                    .fill(gradient)
+                    .opacity(0.9)
+                    .frame(width: max(proxy.size.width, proxy.size.height) * 1.2,
+                           height: max(proxy.size.width, proxy.size.height) * 1.2)
+                    .rotationEffect(.degrees(isOn ? (rotationClockwise ? 1 : -1) * 360 : 0))
+                    .offset(x: 0,
+                            y: -proxy.size.height * 8)
+                
+            }, alignment: .center)
+            .onAppear {
+                withAnimation(self.animation) {
+                    self.isOn = true
+                }
+            }
+            .mask(content)
+    }
+}
+
+// MARK: - Hydrogen
+
+public extension View {
+    func hydrogenAnimation() -> some View {
+        self.modifier(HydrogenAnimation())
+    }
+}
+
+public struct HydrogenAnimation: ViewModifier {
+    
+    @State private var isOn: Bool = false
+    
+    @State private var rotationClockwise: Bool = Bool.random()
+    
+    @State private var duration: Double = Double.random(min: 6.0, max: 10.0)
+    var animation: Animation {
+        Animation
+            .linear(duration: duration)
+            .repeatForever(autoreverses: false)
+    }
+    
+    @State private var center = [UnitPoint.top, .bottom, .leading, .trailing].randomElement()!
+    
+    public func body(content: Content) -> some View {
+        content
+            .overlay(
+                Rectangle()
+                    .fill(
+                        Color.hydrogenViewBackgroundGradient()
+                    )
+                    .scaledToFill()
+                    .rotationEffect(.degrees(isOn ? (rotationClockwise ? 1 : -1) * 360 : 0))
+                    .onAppear {
+                        withAnimation(self.animation) {
+                            self.isOn = true
+                        }
+                    }
+                    .opacity(0.9)
+                    .mask(content)
+            )
+            .shadow(color: Color.lightBlue, radius: 10)
+    }
+}
+
+// MARK: - Rainbow
+
+public extension View {
+    func rainbow() -> some View {
+        self.modifier(Rainbow())
+    }
+}
+
+public struct Rainbow: ViewModifier {
+    let hueColors = stride(from: 0, to: 1, by: 0.01).map {
+        Color(hue: $0, saturation: 1, brightness: 1)
+    }
+    
+    public func body(content: Content) -> some View {
+        content
+            .overlay(GeometryReader { (proxy: GeometryProxy) in
+                ZStack {
+                    LinearGradient(gradient: Gradient(colors: self.hueColors),
+                                   startPoint: .leading,
+                                   endPoint: .trailing)
+                        .frame(width: proxy.size.width)
+                }
+            })
+            .mask(content)
+    }
+}
+
+/// Components
+
+public struct BlurrView: UIViewRepresentable {
+
+    var style: UIBlurEffect.Style
+    
+    public init(style: UIBlurEffect.Style) {
+        self.style = style
+    }
+    
+    public func makeUIView(context: Context) -> UIVisualEffectView {
+        
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: style))
+        
+        return view
+    }
+    
+    public func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        
+    }
+}
