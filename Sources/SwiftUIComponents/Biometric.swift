@@ -7,18 +7,17 @@
 
 import Foundation
 import SwiftUI
+
 #if !os(tvOS)
 import LocalAuthentication
 
 import SwiftUtilities
 
-public struct BiometricType: View {
-
-    static let biometricType = LAContext().biometryType
-
-    public var image: Image {
+public extension Biometric {
+    
+    static var image: Image {
                 
-        switch BiometricType.biometricType {
+        switch Biometric.type {
         case .none: return SwiftUI.Image(systemName: "questionmark.app.dashed")
         case .touchID: return SwiftUI.Image(systemName: "touchid")
         case .faceID: return SwiftUI.Image(systemName: "faceid")
@@ -26,19 +25,13 @@ public struct BiometricType: View {
         }
     }
     
-    public static var name: String? {
-        switch BiometricType.biometricType {
+    static var name: String? {
+        switch Biometric.type {
         case .none: return nil
         case .touchID: return "Touch Id"
         case .faceID: return "Face Id"
         @unknown default: return nil
         }
     }
-    
-    public var body: some View {
-        image
-    }
-    
-    public init() {}
 }
 #endif

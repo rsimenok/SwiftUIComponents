@@ -25,6 +25,8 @@ let package = Package(
         // 3rd party
         .package(name: "DeviceKit", url: "https://github.com/devicekit/DeviceKit.git", .upToNextMajor(from: "4.2.1")),
         .package(name: "SwiftUICharts", url: "https://github.com/AppPear/ChartView", .upToNextMajor(from: "1.5.5")),
+        .package(name: "PermissionsKit", url: "https://github.com/moyoteg/PermissionsKit", .branch("main")),
+        .package(name: "CloudyLogs", url: "https://github.com/moyoteg/CloudyLogs", .branch("master")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -36,6 +38,10 @@ let package = Package(
                 // 3rd Party
                 .product(name: "DeviceKit", package: "DeviceKit", condition: .when(platforms: [.iOS, .watchOS, .macCatalyst])),
                 .product(name: "SwiftUICharts", package: "SwiftUICharts", condition: .when(platforms: [.iOS, .macOS, .watchOS])),
+                .product(name: "NotificationPermission", package: "PermissionsKit"),
+                .product(name: "BluetoothPermission", package: "PermissionsKit"),
+                .product(name: "FaceIDPermission", package: "PermissionsKit"),
+                "CloudyLogs",
             ]
         ),
         
