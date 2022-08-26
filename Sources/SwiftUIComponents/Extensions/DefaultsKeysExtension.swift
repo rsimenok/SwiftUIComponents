@@ -21,5 +21,6 @@ public extension DefaultsKeys {
     var isAppStoreVersion: DefaultsKey<Bool?> { return .init("isAppStoreVersion", defaultValue: nil) }
     var buildLastRun: DefaultsKey<String?> { return .init("buildLastRun", defaultValue: nil) }
     var lastAppBecameInactiveDate: DefaultsKey<Date?> { return .init("lastAppBecameInactiveDate", defaultValue: nil) }
+    var useDemoData: DefaultsKey<Bool> { return .init("useDemoData", defaultValue: false) }
     /// **********************************
 }

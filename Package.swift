@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "SwiftUIComponents",
     platforms: [
-        .iOS(.v14),
+        .iOS("14.5"),
         .macOS(.v11),
         .tvOS(.v14),
         .watchOS(.v7),
@@ -27,6 +27,7 @@ let package = Package(
         .package(name: "SwiftUICharts", url: "https://github.com/AppPear/ChartView", .upToNextMajor(from: "1.5.5")),
         .package(name: "PermissionsKit", url: "https://github.com/moyoteg/PermissionsKit", .branch("main")),
         .package(name: "CloudyLogs", url: "https://github.com/moyoteg/CloudyLogs", .branch("master")),
+        .package(name: "SwiftyUserDefaults", url: "https://github.com/sunshinejr/SwiftyUserDefaults", from: "5.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -38,10 +39,28 @@ let package = Package(
                 // 3rd Party
                 .product(name: "DeviceKit", package: "DeviceKit", condition: .when(platforms: [.iOS, .watchOS, .macCatalyst])),
                 .product(name: "SwiftUICharts", package: "SwiftUICharts", condition: .when(platforms: [.iOS, .macOS, .watchOS])),
+                
+                // PermissionsKit
+                .product(name: "CameraPermission", package: "PermissionsKit"),
+                .product(name: "PhotoLibraryPermission", package: "PermissionsKit"),
                 .product(name: "NotificationPermission", package: "PermissionsKit"),
+                .product(name: "MicrophonePermission", package: "PermissionsKit"),
+                .product(name: "CalendarPermission", package: "PermissionsKit"),
+                .product(name: "ContactsPermission", package: "PermissionsKit"),
+                .product(name: "RemindersPermission", package: "PermissionsKit"),
+                .product(name: "SpeechRecognizerPermission", package: "PermissionsKit"),
+                .product(name: "LocationWhenInUsePermission", package: "PermissionsKit"),
+                .product(name: "LocationAlwaysPermission", package: "PermissionsKit"),
+                .product(name: "MotionPermission", package: "PermissionsKit"),
+                .product(name: "MediaLibraryPermission", package: "PermissionsKit"),
                 .product(name: "BluetoothPermission", package: "PermissionsKit"),
+                .product(name: "TrackingPermission", package: "PermissionsKit"),
                 .product(name: "FaceIDPermission", package: "PermissionsKit"),
+                .product(name: "SiriPermission", package: "PermissionsKit"),
+                .product(name: "HealthPermission", package: "PermissionsKit"),
+                
                 "CloudyLogs",
+                "SwiftyUserDefaults",
             ]
         ),
         
