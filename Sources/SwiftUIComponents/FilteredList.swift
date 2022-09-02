@@ -24,47 +24,42 @@ public struct FilteredList<Element: StringFilterable,
     
     let title: String?
     let list: [Element]
-    @State private var filter: String = ""
-    @State private var filteredList: [Element] = []
+    @State private var filterText: String = ""
+    private var filteredList: [Element] {
+        
+        if filterText.isEmpty {
+            return list
+        } else {
+            return list.filter{
+                $0.filter
+                    .lowercased()
+                    .contains(filterText.lowercased())
+            }
+            .sorted {
+                $0.description < $1.description
+            }
+        }
+    }
     var content: (Element) -> Content
     var onDelete: (((IndexSet) -> Void)?)
     @State private var selection = Set<Element>()
     
     public var body: some View {
-        let binding = Binding(
-            get: { self.filter },
-            set: { text in
-                
-                self.filter = text
-                // print("filter: \(filter)")
-                
-                if filter.isEmpty {
-                    filteredList = list
-                } else {
-                    filteredList = list.filter{
-                        $0.filter
-                            .lowercased()
-                            .contains(filter.lowercased())
-                    }
-                    .sorted {
-                        $0.description < $1.description
-                    }
-                }
-                // print("filtered count: \(filteredList.count)")
-            }
-        )
         
-        return VStack {
+        VStack {
             HStack {
                 Image(systemName: "magnifyingglass")
-                Text("(\(filter.isEmpty ? "\(list.count)":"\(filteredList.count)"))")
+                Text("(\(filterText.isEmpty ? "\(list.count)":"\(filteredList.count)"))")
                     .font(.system(.caption))
-                TextField("filter", text: binding.animation(.spring()))
+                TextField("filter", text: $filterText.animation(.spring()))
                     .padding([.top, .bottom], 8)
-                    .modifier(Modifier.ClearButton(text: binding))
+                    .modifier(Modifier.ClearButton(text: $filterText))
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
             }
+            .onChange(of: filterText, perform: { text in
+                self.filterText = text
+            })
             .padding([.leading, .trailing], 16)
             .background(
                 Color.gray.opacity(0.2)
@@ -77,7 +72,11 @@ public struct FilteredList<Element: StringFilterable,
             #if !os(watchOS)
             List(selection: $selection) {
                 if filteredList.isEmpty {
-                    Text("Nothing to show")
+                    HStack {
+                        Spacer()
+                        Text("Nothing to show")
+                        Spacer()
+                    }
                 } else {
                     ForEach(filteredList,
                             id:\.self.filter) { element in
@@ -101,9 +100,6 @@ public struct FilteredList<Element: StringFilterable,
             }
             .navigationBarTitle(title ?? "")
             #endif
-        }
-        .onAppear {
-            self.filteredList = list
         }
     }
     
