@@ -9,26 +9,107 @@ import Foundation
 
 import CloudyLogs
 import PermissionsKit
-import NotificationPermission
+
+/*
+#if BluetoothPermission
+#if NotificationPermission
+#if FaceIDPermission
+#if CameraPermission
+#if PhotoLibraryPermission
+#if MicrophonePermission
+#if CalendarPermission
+#if ContactsPermission
+#if RemindersPermission
+#if SpeechRecognizerPermission
+#if LocationWhenInUsePermission
+#if LocationAlwaysPermission
+#if MotionPermission
+#if MediaLibraryPermission
+#if TrackingPermission
+#if SiriPermission
+#if HealthPermission
+*/
+
+/*
+ Configuration file example:
+ 
+ // Permissions
+ BluetoothPermission         = YES
+ NotificationPermission      = YES
+ FaceIDPermission            = YES
+ CameraPermission            = NO
+ PhotoLibraryPermission      = NO
+ MicrophonePermission        = NO
+ CalendarPermission          = NO
+ ContactsPermission          = NO
+ RemindersPermission         = NO
+ SpeechRecognizerPermission  = NO
+ LocationWhenInUsePermission = YES
+ LocationAlwaysPermission    = YES
+ MotionPermission            = NO
+ MediaLibraryPermission      = NO
+ TrackingPermission          = NO
+ SiriPermission              = NO
+ HealthPermission            = NO
+ 
+ */
+
 import BluetoothPermission
-import FaceIDPermission
-import CameraPermission
-import PhotoLibraryPermission
 import NotificationPermission
-import MicrophonePermission
-import CalendarPermission
-import ContactsPermission
-import RemindersPermission
-import SpeechRecognizerPermission
-import LocationWhenInUsePermission
-import LocationAlwaysPermission
-import MotionPermission
-import MediaLibraryPermission
-import BluetoothPermission
-import TrackingPermission
 import FaceIDPermission
-import SiriPermission
-import HealthPermission
+
+// TOOO: figure out a way to conditionally compile enums for swift package
+//#if BluetoothPermission
+//import BluetoothPermission
+//#endif
+//#if NotificationPermission
+//import NotificationPermission
+//#endif
+//#if FaceIDPermission
+//import FaceIDPermission
+//#endif
+//#if CameraPermission
+//import CameraPermission
+//#endif
+//#if PhotoLibraryPermission
+//import PhotoLibraryPermission
+//#endif
+//#if MicrophonePermission
+//import MicrophonePermission
+//#endif
+//#if CalendarPermission
+//import CalendarPermission
+//#endif
+//#if ContactsPermission
+//import ContactsPermission
+//#endif
+//#if RemindersPermission
+//import RemindersPermission
+//#endif
+//#if SpeechRecognizerPermission
+//import SpeechRecognizerPermission
+//#endif
+//#if LocationWhenInUsePermission
+//import LocationWhenInUsePermission
+//#endif
+//#if LocationAlwaysPermission
+//import LocationAlwaysPermission
+//#endif
+//#if MotionPermission
+//import MotionPermission
+//#endif
+//#if MediaLibraryPermission
+//import MediaLibraryPermission
+//#endif
+//#if TrackingPermission
+//import TrackingPermission
+//#endif
+//#if SiriPermission
+//import SiriPermission
+//#endif
+//#if HealthPermission
+//import HealthPermission
+//#endif
 
 /*
  
@@ -154,51 +235,253 @@ import HealthPermission
  <string>to learn</string>
  */
 
-public enum Permission: String, CaseIterable {
-    
+public enum Permission: CaseIterable, Hashable {
+        
     case bluetooth
     case notification
     case faceId
-    case camera
-    case photoLibrary
-    case microphone
-    case calendar
-    case contacts
-    case reminders
-    case speechRecognizer
-    case locationWhenInUse
-    case locationAlways
-    case motion
-    case mediaLibrary
-    case tracking
-    case siri
-#if os(iOS) && PERMISSIONSKIT_HEALTH
-    case health
-#endif
+
+//#if BluetoothPermission
+//    case bluetooth
+//#endif
+//#if NotificationPermission
+//    case notification
+//#endif
+//#if FaceIDPermission
+//    case faceId
+//#endif
+//#if CameraPermission
+//    case camera
+//#endif
+//#if PhotoLibraryPermission
+//    case photoLibrary
+//#endif
+//#if MicrophonePermission
+//    case microphone
+//#endif
+//#if CalendarPermission
+//    case calendar
+//#endif
+//#if ContactsPermission
+//    case contacts
+//#endif
+//#if RemindersPermission
+//    case reminders
+//#endif
+//#if SpeechRecognizerPermission
+//    case speechRecognizer
+//#endif
+//#if LocationWhenInUsePermission
+//    case locationWhenInUse
+//#endif
+//#if LocationAlwaysPermission
+//    case locationAlways
+//#endif
+//#if MotionPermission
+//    case motion
+//#endif
+//#if MediaLibraryPermission
+//    case mediaLibrary
+//#endif
+//#if TrackingPermission
+//    case tracking
+//#endif
+//#if SiriPermission
+//    case siri
+//#endif
+//#if HealthPermission
+//#if os(iOS) && PERMISSIONSKIT_HEALTH
+//    case health
+//#endif
+//#endif
+    
 
     public var permission: PermissionsKit.Permission {
         switch self {
         case .bluetooth: return PermissionsKit.Permission.bluetooth
         case .notification: return PermissionsKit.Permission.notification
         case .faceId: return PermissionsKit.Permission.faceID
-        case .camera: return PermissionsKit.Permission.camera
-        case .photoLibrary: return PermissionsKit.Permission.photoLibrary
-        case .microphone: return PermissionsKit.Permission.microphone
-        case .calendar: return PermissionsKit.Permission.calendar
-        case .contacts: return PermissionsKit.Permission.contacts
-        case .reminders: return PermissionsKit.Permission.reminders
-        case .speechRecognizer: return PermissionsKit.Permission.speech
-        case .locationWhenInUse: return PermissionsKit.Permission.locationWhenInUse
-        case .locationAlways: return PermissionsKit.Permission.locationAlways
-        case .motion: return PermissionsKit.Permission.motion
-        case .mediaLibrary: return PermissionsKit.Permission.mediaLibrary
-        case .tracking: return PermissionsKit.Permission.tracking
-        case .siri: return PermissionsKit.Permission.siri
-#if os(iOS) && PERMISSIONSKIT_HEALTH
-        case .health: return PermissionsKit.Permission.health
-#endif
+//#if BluetoothPermission
+//        case .bluetooth: return PermissionsKit.Permission.bluetooth
+//#endif
+//#if NotificationPermission
+//        case .notification: return PermissionsKit.Permission.notification
+//#endif
+//#if FaceIDPermission
+//        case .faceId: return PermissionsKit.Permission.faceID
+//#endif
+//#if CameraPermission
+//        case .camera: return PermissionsKit.Permission.camera
+//#endif
+//#if PhotoLibraryPermission
+//        case .photoLibrary: return PermissionsKit.Permission.photoLibrary
+//#endif
+//#if MicrophonePermission
+//        case .microphone: return PermissionsKit.Permission.microphone
+//#endif
+//#if CalendarPermission
+//        case .calendar: return PermissionsKit.Permission.calendar
+//#endif
+//#if ContactsPermission
+//        case .contacts: return PermissionsKit.Permission.contacts
+//#endif
+//#if RemindersPermission
+//        case .reminders: return PermissionsKit.Permission.reminders
+//#endif
+//#if SpeechRecognizerPermission
+//        case .speechRecognizer: return PermissionsKit.Permission.speech
+//#endif
+//#if LocationWhenInUsePermission
+//        case .locationWhenInUse: return PermissionsKit.Permission.locationWhenInUse
+//#endif
+//#if LocationAlwaysPermission
+//        case .locationAlways: return PermissionsKit.Permission.locationAlways
+//#endif
+//#if MotionPermission
+//        case .motion: return PermissionsKit.Permission.motion
+//#endif
+//#if MediaLibraryPermission
+//        case .mediaLibrary: return PermissionsKit.Permission.mediaLibrary
+//#endif
+//#if TrackingPermission
+//        case .tracking: return PermissionsKit.Permission.tracking
+//#endif
+//#if SiriPermission
+//        case .siri: return PermissionsKit.Permission.siri
+//#endif
+//#if HealthPermission
+//#if os(iOS) && PERMISSIONSKIT_HEALTH
+//        case .health: return PermissionsKit.Permission.health
+//#endif
+//#endif
         }
     }
+    
+    public var name: String {
+        switch self {
+        case .bluetooth: return "bluetooth"
+        case .notification: return "notification"
+        case .faceId: return "faceId"
+//#if BluetoothPermission
+//        case .bluetooth: return "bluetooth"
+//#endif
+//#if NotificationPermission
+//        case .notification: return "notification"
+//#endif
+//#if FaceIDPermission
+//        case .faceId: return "faceId"
+//#endif
+//#if CameraPermission
+//        case .camera: return "camera"
+//#endif
+//#if PhotoLibraryPermission
+//        case .photoLibrary: return "photoLibrary"
+//#endif
+//#if MicrophonePermission
+//        case .microphone: return "microphone"
+//#endif
+//#if CalendarPermission
+//        case .calendar: return "calendar"
+//#endif
+//#if ContactsPermission
+//        case .contacts: return "contacts"
+//#endif
+//#if RemindersPermission
+//        case .reminders: return "reminders"
+//#endif
+//#if SpeechRecognizerPermission
+//        case .speechRecognizer: return "speechRecognizer"
+//#endif
+//#if LocationWhenInUsePermission
+//        case .locationWhenInUse: return "locationWhenInUse"
+//#endif
+//#if LocationAlwaysPermission
+//        case .locationAlways: return "locationAlways"
+//#endif
+//#if MotionPermission
+//        case .motion: return "motion"
+//#endif
+//#if MediaLibraryPermission
+//        case .mediaLibrary: return "mediaLibrary"
+//#endif
+//#if TrackingPermission
+//        case .tracking: return "tracking"
+//#endif
+//#if SiriPermission
+//        case .siri: return "siri"
+//#endif
+//#if HealthPermission
+//#if os(iOS) && PERMISSIONSKIT_HEALTH
+//        case .health: return "health"
+//#endif
+//#endif
+//        default: break
+        }
+    }
+    
+    public var status: String {
+        switch self {
+            
+        case .bluetooth: return PermissionsKit.Permission.bluetooth.status.description
+        case .notification: return PermissionsKit.Permission.notification.status.description
+        case .faceId: return PermissionsKit.Permission.faceID.status.description
+//#if BluetoothPermission
+//        case .bluetooth: return Permission.bluetooth.status
+//#endif
+//#if NotificationPermission
+//        case .notification: return Permission.notification.status
+//#endif
+//#if FaceIDPermission
+//        case .faceId: return Permission.faceId.status
+//#endif
+//#if CameraPermission
+//        case .camera: return Permission.camera.status
+//#endif
+//#if PhotoLibraryPermission
+//        case .photoLibrary: return Permission.photoLibrary.status
+//#endif
+//#if MicrophonePermission
+//        case .microphone: return Permission.microphone.status
+//#endif
+//#if CalendarPermission
+//        case .calendar: return Permission.calendar.status
+//#endif
+//#if ContactsPermission
+//        case .contacts: return Permission.contacts.status
+//#endif
+//#if RemindersPermission
+//        case .reminders: return Permission.reminders.status
+//#endif
+//#if SpeechRecognizerPermission
+//        case .speechRecognizer: return Permission.speechRecognizer.status
+//#endif
+//#if LocationWhenInUsePermission
+//        case .locationWhenInUse: return Permission.locationWhenInUse.status
+//#endif
+//#if LocationAlwaysPermission
+//        case .locationAlways: return Permission.locationAlways.status
+//#endif
+//#if MotionPermission
+//        case .motion: return Permission.motion.status
+//#endif
+//#if MediaLibraryPermission
+//        case .mediaLibrary: return Permission.mediaLibrary.status
+//#endif
+//#if TrackingPermission
+//        case .tracking: return Permission.tracking.status
+//#endif
+//#if SiriPermission
+//        case .siri: return Permission.siri.status
+//#endif
+//#if HealthPermission
+//#if os(iOS) && PERMISSIONSKIT_HEALTH
+//        case .health: return Permission.health.status
+//#endif
+//#endif
+//        default: break
+        }
+    }
+    
     
     public var isAuthorized: Bool {
         
@@ -218,39 +501,214 @@ public enum Permission: String, CaseIterable {
     
     public static func logAllPermissions() {
         
+#if BluetoothPermission
+        Logger.log("Permission: #BluetoothPermission")
+#else
+        Logger.log("Permission: no #if BluetoothPermission compiler configuration definition or value is false")
+#endif
+#if NotificationPermission
+        Logger.log("Permission: #NotificationPermission")
+#else
+        Logger.log("Permission: no #if NotificationPermission compiler configuration definition or value is false")
+#endif
+#if FaceIDPermission
+        Logger.log("Permission: #FaceIDPermission")
+#else
+        Logger.log("Permission: no #if FaceIDPermission compiler configuration definition or value is false")
+#endif
+#if CameraPermission
+        Logger.log("Permission: #CameraPermission")
+#else
+        Logger.log("Permission: no #if CameraPermission compiler configuration definition or value is false")
+#endif
+#if PhotoLibraryPermission
+        Logger.log("Permission: #PhotoLibraryPermission")
+#else
+        Logger.log("Permission: no #if PhotoLibraryPermission compiler configuration definition or value is false")
+#endif
+#if MicrophonePermission
+        Logger.log("Permission: #MicrophonePermission")
+#else
+        Logger.log("Permission: no #if MicrophonePermission compiler configuration definition or value is false")
+#endif
+#if CalendarPermission
+        Logger.log("Permission: #CalendarPermission")
+#else
+        Logger.log("Permission: no #if CalendarPermission compiler configuration definition or value is false")
+#endif
+#if ContactsPermission
+        Logger.log("Permission: #ContactsPermission")
+#else
+        Logger.log("Permission: no #if ContactsPermission compiler configuration definition or value is false")
+#endif
+#if RemindersPermission
+        Logger.log("Permission: #RemindersPermission")
+#else
+        Logger.log("Permission: no #if RemindersPermission compiler configuration definition or value is false")
+#endif
+#if SpeechRecognizerPermission
+        Logger.log("Permission: #SpeechRecognizerPermission")
+#else
+        Logger.log("Permission: no #if SpeechRecognizerPermission compiler configuration definition or value is false")
+#endif
+#if LocationWhenInUsePermission
+        Logger.log("Permission: #LocationWhenInUsePermission")
+#else
+        Logger.log("Permission: no #if LocationWhenInUsePermission compiler configuration definition or value is false")
+#endif
+#if LocationAlwaysPermission
+        Logger.log("Permission: #LocationAlwaysPermission")
+#else
+        Logger.log("Permission: no #if LocationAlwaysPermission compiler configuration definition or value is false")
+#endif
+#if MotionPermission
+        Logger.log("Permission: #MotionPermission")
+#else
+        Logger.log("Permission: no #if MotionPermission compiler configuration definition or value is false")
+#endif
+#if MediaLibraryPermission
+        Logger.log("Permission: #MediaLibraryPermission")
+#else
+        Logger.log("Permission: no #if MediaLibraryPermission compiler configuration definition or value is false")
+#endif
+#if TrackingPermission
+        Logger.log("Permission: #TrackingPermission")
+#else
+        Logger.log("Permission: no #if TrackingPermission compiler configuration definition or value is false or value is false")
+#endif
+#if SiriPermission
+        Logger.log("Permission: #SiriPermission")
+#else
+        Logger.log("Permission: no #if SiriPermission compiler configuration definition or value is false")
+#endif
+#if HealthPermission
+        Logger.log("Permission: #HealthPermission")
+#else
+        Logger.log("Permission: no #if HealthPermission compiler configuration definition or value is false")
+#endif
+        
         for permission in Permission.allCases {
             
             switch permission {
+               
+            case .bluetooth: let key = PermissionsKit.Permission.bluetooth.usageDescriptionKey; let status = PermissionsKit.Permission.bluetooth.status; Logger.log("Permission: \(permission.permission.kind.name): key: \(String(describing: key)), status: \(status)")
+            case .notification: let authorized = PermissionsKit.Permission.notification.authorized; Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
+            case .faceId: let authorized = PermissionsKit.Permission.faceID.authorized; Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
                 
-            case .bluetooth:
-                let key = PermissionsKit.Permission.bluetooth.usageDescriptionKey
-                let status = PermissionsKit.Permission.bluetooth.status
-                Logger.log("Permission: \(permission.permission.kind.name): key: \(String(describing: key)), status: \(status)")
-                
-            case .notification:
-                let authorized = PermissionsKit.Permission.notification.authorized
-                Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
-                
-            case .faceId:
-                let authorized = PermissionsKit.Permission.faceID.authorized
-                Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
-            case .camera: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.camera.authorized)")
-            case .photoLibrary: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.photoLibrary.authorized)")
-            case .microphone: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.microphone.authorized)")
-            case .calendar: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.calendar.authorized)")
-            case .contacts: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.contacts.authorized)")
-            case .reminders: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.reminders.authorized)")
-            case .speechRecognizer: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.speech.authorized)")
-            case .locationWhenInUse: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.locationWhenInUse.authorized)")
-            case .locationAlways: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.locationAlways.authorized)")
-            case .motion: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.motion.authorized)")
-            case .mediaLibrary: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.mediaLibrary.authorized)")
-            case .tracking: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.tracking.authorized)")
-            case .siri: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.siri.authorized)")
-#if os(iOS) && PERMISSIONSKIT_HEALTH
-            case .health: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.health.authorized)")
-#endif
+//#if BluetoothPermission
+//            case .bluetooth: let key = PermissionsKit.Permission.bluetooth.usageDescriptionKey; let status = PermissionsKit.Permission.bluetooth.status; Logger.log("Permission: \(permission.permission.kind.name): key: \(String(describing: key)), status: \(status)")
+//                #endif
+//#if NotificationPermission
+//            case .notification: let authorized = PermissionsKit.Permission.notification.authorized; Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
+//                #endif
+//#if FaceIDPermission
+//            case .faceId: let authorized = PermissionsKit.Permission.faceID.authorized; Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
+//                #endif
+//#if CameraPermission
+//            case .camera: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.camera.authorized)")
+//                #endif
+//#if PhotoLibraryPermission
+//            case .photoLibrary: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.photoLibrary.authorized)")
+//                #endif
+//#if MicrophonePermission
+//            case .microphone: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.microphone.authorized)")
+//                #endif
+//#if CalendarPermission
+//            case .calendar: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.calendar.authorized)")
+//                #endif
+//#if ContactsPermission
+//            case .contacts: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.contacts.authorized)")
+//                #endif
+//#if RemindersPermission
+//            case .reminders: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.reminders.authorized)")
+//                #endif
+//#if SpeechRecognizerPermission
+//            case .speechRecognizer: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.speech.authorized)")
+//                #endif
+//#if LocationWhenInUsePermission
+//            case .locationWhenInUse: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.locationWhenInUse.authorized)")
+//                #endif
+//#if LocationAlwaysPermission
+//            case .locationAlways: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.locationAlways.authorized)")
+//                #endif
+//#if MotionPermission
+//            case .motion: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.motion.authorized)")
+//                #endif
+//#if MediaLibraryPermission
+//            case .mediaLibrary: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.mediaLibrary.authorized)")
+//                #endif
+//#if TrackingPermission
+//            case .tracking: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.tracking.authorized)")
+//                #endif
+//#if SiriPermission
+//            case .siri: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.siri.authorized)")
+//                #endif
+//#if HealthPermission
+//#if os(iOS) && PERMISSIONSKIT_HEALTH
+//            case .health: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.health.authorized)")
+//#endif
+//#endif
             }
+        }
+    }
+    
+    public static func request(completion: @escaping ()->Void) {
+        
+        switch self {
+#if BluetoothPermission
+        case .bluetooth: return Permission.bluetooth.request
+#endif
+#if NotificationPermission
+        case .notification: return Permission.notification.request
+#endif
+#if FaceIDPermission
+        case .faceId: return Permission.faceId.request
+#endif
+#if CameraPermission
+        case .camera: return Permission.camera.request
+#endif
+#if PhotoLibraryPermission
+        case .photoLibrary: return Permission.photoLibrary.request
+#endif
+#if MicrophonePermission
+        case .microphone: return Permission.microphone.request
+#endif
+#if CalendarPermission
+        case .calendar: return Permission.calendar.request
+#endif
+#if ContactsPermission
+        case .contacts: return Permission.contacts.request
+#endif
+#if RemindersPermission
+        case .reminders: return Permission.reminders.request
+#endif
+#if SpeechRecognizerPermission
+        case .speechRecognizer: return Permission.speechRecognizer.request
+#endif
+#if LocationWhenInUsePermission
+        case .locationWhenInUse: return Permission.locationWhenInUse.request
+#endif
+#if LocationAlwaysPermission
+        case .locationAlways: return Permission.locationAlways.request
+#endif
+#if MotionPermission
+        case .motion: return Permission.motion.request
+#endif
+#if MediaLibraryPermission
+        case .mediaLibrary: return Permission.mediaLibrary.request
+#endif
+#if TrackingPermission
+        case .tracking: return Permission.tracking.request
+#endif
+#if SiriPermission
+        case .siri: return Permission.siri.request
+#endif
+#if HealthPermission
+#if os(iOS) && PERMISSIONSKIT_HEALTH
+        case .health: return Permission.health.request
+#endif
+#endif
+        default: break
         }
     }
 }
