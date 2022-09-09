@@ -61,6 +61,7 @@ public struct FilteredList<Element: StringFilterable,
                 self.filterText = text
             })
             .padding([.leading, .trailing], 16)
+            .padding([.top, .bottom], 2)
             .background(
                 Color.gray.opacity(0.2)
                     .cornerRadius(10)
