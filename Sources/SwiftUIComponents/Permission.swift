@@ -224,8 +224,31 @@ public enum Permission: CaseIterable, Hashable {
         }
     }
     
-    public var status: String {
-        return "\(permission.status)"
+    public enum Status: Int, CustomStringConvertible {
+        
+        case authorized
+        case denied
+        case notDetermined
+        case notSupported
+        
+        public var description: String {
+            switch self {
+            case .authorized: return "authorized"
+            case .denied: return "denied"
+            case .notDetermined: return "not determined"
+            case .notSupported: return "not supported"
+            }
+        }
+    }
+    
+    public var status: Permission.Status {
+        
+        switch permission.status {
+        case .authorized: return .authorized
+        case .denied: return .denied
+        case .notDetermined: return .notSupported
+        case .notSupported: return .notSupported
+        }
     }
     
     public var isAuthorized: Bool {
