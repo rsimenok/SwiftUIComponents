@@ -24,7 +24,7 @@ public struct FilteredList<Element: StringFilterable,
     
     let title: String?
     let list: [Element]
-    @State private var filterText: String = ""
+    @Binding private var filterText: String
     private var filteredList: [Element] {
         
         if filterText.isEmpty {
@@ -69,6 +69,7 @@ public struct FilteredList<Element: StringFilterable,
             )
             
             Divider()
+                .frame(height: 2)
             
             #if !os(watchOS)
             List(selection: $selection) {
@@ -107,13 +108,13 @@ public struct FilteredList<Element: StringFilterable,
     public init(_ title: String = "",
                 list: [Element],
                 selection: Set<Element> = Set<Element>(),
+                filterText: Binding<String> = .constant(""),
                 @ViewBuilder content: @escaping (Element) -> Content) {
         self.title = title
-        self.list = list.sorted {
-            $0.description < $1.description
-        }
+        self.list = list
         self.content = content
         self.selection = selection
+        self._filterText = filterText
     }
 }
 

@@ -10,7 +10,7 @@ import CloudyLogs
 
 public extension View {
     
-    func clearButton(text: Binding<String>, foregroundColor: Color) -> some View {
+    func clearButton(text: Binding<String>, foregroundColor: Color = .blue) -> some View {
         self.modifier(ClearButton(text: text, foregroundColor: foregroundColor))
     }
 }
@@ -27,11 +27,11 @@ public struct ClearButton: ViewModifier {
     }
     
     public func body(content: Content) -> some View {
-        HStack(alignment: .center) {
+        HStack() {
             content
                 .padding([.trailing], 0)
                 .padding([.top, .bottom, .leading])
-            
+                        
             SwiftUI.Button(action: {
                 withAnimation {
                     self.text = ""
