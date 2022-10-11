@@ -11,6 +11,79 @@ import CloudyLogs
 
 public extension View {
     
+    func localAlert(presented: Binding<Bool>, text: String, placement: LocalAlert.Placement = .top) -> some View {
+        self.modifier(LocalAlert(presented: presented, text: text, placement: placement))
+    }
+}
+
+
+public struct LocalAlert: ViewModifier {
+    
+    public enum Placement {
+        case top
+        case bottom
+    }
+    
+    @Binding var presented: Bool
+    
+    var text: String
+
+    var placement: LocalAlert.Placement
+
+    public func body(content: Content) -> some View {
+        
+        ZStack {
+            
+            content
+            
+            if presented {
+                
+                VStack {
+                    
+                    if placement == .bottom {
+                        Spacer()
+                    }
+                    
+                    GeometryReader { geometry in
+                        ZStack {
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .padding()
+                                .zIndex(0)
+                            
+                            ScrollView {
+                                VStack {
+                                    HStack {
+                                        Text(text)
+                                            .padding()
+                                            .foregroundColor(.black)
+                                    }
+                                }
+                            }
+                                
+                        }
+                        .frame(height: geometry.size.height / 8)
+                        .opacity(0.9)
+                        .onTapGesture {
+                            
+                            withAnimation(.easeInOut) {
+                                presented = false
+                            }
+                        }
+                    }
+                    .transition(.move(edge: .top))
+                    
+                    if placement == .top {
+                        Spacer()
+                    }
+                }
+            }
+        }
+    }
+}
+
+public extension View {
+    
     func localConsole(presented: Bool) -> some View {
         self.modifier(LocalConsole(presented: presented))
     }
@@ -43,6 +116,8 @@ struct LocalConsole: ViewModifier {
             }
     }
     
+    @GestureState var isDetectingDrag = false
+
     var drag: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -57,6 +132,12 @@ struct LocalConsole: ViewModifier {
                 
             }.updating($startLocation) { (value, startLocation, transaction) in
                 startLocation = startLocation ?? location // 2
+                
+                DispatchQueue.main.async {
+                    withAnimation {
+                        isMoving = false
+                    }
+                }
             }
             .onEnded { value in
                 withAnimation {
@@ -131,8 +212,14 @@ struct LocalConsole: ViewModifier {
     @State private var height = 10.0
     let shrinkMultiplier = 0.8
     
-    //
-    @State private var isMoving = false
+    // isMoving
+    @State private var isMoving = false {
+        didSet {
+            opacity = isMoving ? movingMinOpacity:1.0
+        }
+    }
+    let movingMinOpacity = 0.3
+    
     @State private var allowDragging = false
     
     @State private var isHidden = false
@@ -153,6 +240,8 @@ struct LocalConsole: ViewModifier {
     
     @State var filterText: String = ""
     
+    @State var showAlert: Bool = false
+    
     public init(presented: Bool) {
         self.presented = presented
     }
@@ -162,6 +251,7 @@ struct LocalConsole: ViewModifier {
         ZStack {
             
             content
+                .localAlert(presented: $showAlert.animation(), text: " test  test  test  test  test  test  test  test  test  test ")
             
             if presented {
                 
@@ -176,7 +266,7 @@ struct LocalConsole: ViewModifier {
                                 .fill(.green)
 //                                .opacity(isMoving ? 0.1:0.25)
 //                                .fill(allowDragging ? isMoving ? .purple:.green :.blue)
-                                .shadow(color: allowDragging ? .green:.blue, radius: allowDragging ? 40:5)
+                                .shadow(color: allowDragging ? .white:.blue, radius: allowDragging ? 40:5)
                             
                             Rectangle()
                                 .blur(radius: 20)
@@ -202,7 +292,6 @@ struct LocalConsole: ViewModifier {
                                 .cornerRadius(25)
                         }
                         .padding()
-                        .opacity(isMoving ? 0.5:1.0)
                         .minimumScaleFactor(0.2)
                         .opacity(isHidden ? 0.0:1.0)
                         .cornerRadius(25)
@@ -290,6 +379,16 @@ struct LocalConsole: ViewModifier {
                             Image(systemName: "cube.transparent")
                         }
                     }
+
+                    Button {
+                        withAnimation(.easeInOut) {
+                            showAlert.toggle()
+                        }
+                    } label: {
+                        Text("show alert")
+                        Text("\(showAlert.description)")
+                    }
+                    
                     
                 } label: {
                     Image(systemName: "ellipsis.circle.fill")
