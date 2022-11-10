@@ -54,6 +54,16 @@ public struct AnimatedEllipsis: View {
     }
     
     public init() {}
+    
+    public struct Tester: View {
+        
+        public var body: some View {
+            AnimatedEllipsis()
+        }
+        
+        public init() {}
+
+    }
 }
 
 struct AnimatedEllipsis_Previews: PreviewProvider {

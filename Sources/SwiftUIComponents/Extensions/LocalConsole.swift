@@ -132,12 +132,6 @@ struct LocalConsole: ViewModifier {
                 
             }.updating($startLocation) { (value, startLocation, transaction) in
                 startLocation = startLocation ?? location // 2
-                
-                DispatchQueue.main.async {
-                    withAnimation {
-                        isMoving = false
-                    }
-                }
             }
             .onEnded { value in
                 withAnimation {
@@ -215,7 +209,7 @@ struct LocalConsole: ViewModifier {
     // isMoving
     @State private var isMoving = false {
         didSet {
-            opacity = isMoving ? movingMinOpacity:1.0
+//            opacity = isMoving ? movingMinOpacity:1.0
         }
     }
     let movingMinOpacity = 0.3
@@ -361,6 +355,12 @@ struct LocalConsole: ViewModifier {
                         } label: {
                             Text("\(Logger.LogType.warning.rawValue)")
                         }
+                        
+                        Button {
+                            filterText = Logger.LogType.success.rawValue
+                        } label: {
+                            Text("\(Logger.LogType.success.rawValue)")
+                        }
                     }
                     
                     Menu("Transparency") {
@@ -386,6 +386,17 @@ struct LocalConsole: ViewModifier {
                         }
                     } label: {
                         Text("show alert")
+                        Text("\(showAlert.description)")
+                    }
+
+                    Button {
+                        withAnimation(.easeInOut) {
+                            width = minWidth
+                            height = minHeight
+                            location = CGPoint(x: 0, y: 0)
+                        }
+                    } label: {
+                        Text("reset")
                         Text("\(showAlert.description)")
                     }
                     
