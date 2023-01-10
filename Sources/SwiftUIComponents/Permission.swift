@@ -13,20 +13,20 @@ import PermissionsKit
 import BluetoothPermission
 import NotificationPermission
 import FaceIDPermission
-import CameraPermission
-import PhotoLibraryPermission
-import MicrophonePermission
-import CalendarPermission
-import ContactsPermission
-import RemindersPermission
-import SpeechRecognizerPermission
+//import CameraPermission
+//import PhotoLibraryPermission
+//import MicrophonePermission
+//import CalendarPermission
+//import ContactsPermission
+//import RemindersPermission
+//import SpeechRecognizerPermission
 import LocationWhenInUsePermission
-import LocationAlwaysPermission
-import MotionPermission
-import MediaLibraryPermission
-import TrackingPermission
-import SiriPermission
-import HealthPermission
+//import LocationAlwaysPermission
+//import MotionPermission
+//import MediaLibraryPermission
+//import TrackingPermission
+//import SiriPermission
+//import HealthPermission
 
 /*
  
@@ -159,44 +159,44 @@ public enum Permission: CaseIterable, Hashable {
     case bluetooth
     case notification
     case faceId
-    case camera
-    case photoLibrary
-    case microphone
-    case calendar
-    case contacts
-    case reminders
-    case speechRecognizer
+//    case camera
+//    case photoLibrary
+//    case microphone
+//    case calendar
+//    case contacts
+//    case reminders
+//    case speechRecognizer
     case locationWhenInUse
-    case locationAlways
-    case motion
-    case mediaLibrary
-    case tracking
-    case siri
-#if os(iOS) && PERMISSIONSKIT_HEALTH
-    case health
-#endif
+//    case locationAlways
+//    case motion
+//    case mediaLibrary
+//    case tracking
+//    case siri
+//#if os(iOS) && PERMISSIONSKIT_HEALTH
+//    case health
+//#endif
 
     internal var permission: PermissionsKit.Permission {
         switch self {
         case .bluetooth: return PermissionsKit.Permission.bluetooth
         case .notification: return PermissionsKit.Permission.notification
         case .faceId: return PermissionsKit.Permission.faceID
-        case .camera: return PermissionsKit.Permission.camera
-        case .photoLibrary: return PermissionsKit.Permission.photoLibrary
-        case .microphone: return PermissionsKit.Permission.microphone
-        case .calendar: return PermissionsKit.Permission.calendar
-        case .contacts: return PermissionsKit.Permission.contacts
-        case .reminders: return PermissionsKit.Permission.reminders
-        case .speechRecognizer: return PermissionsKit.Permission.speech
+//        case .camera: return PermissionsKit.Permission.camera
+//        case .photoLibrary: return PermissionsKit.Permission.photoLibrary
+//        case .microphone: return PermissionsKit.Permission.microphone
+//        case .calendar: return PermissionsKit.Permission.calendar
+//        case .contacts: return PermissionsKit.Permission.contacts
+//        case .reminders: return PermissionsKit.Permission.reminders
+//        case .speechRecognizer: return PermissionsKit.Permission.speech
         case .locationWhenInUse: return PermissionsKit.Permission.locationWhenInUse
-        case .locationAlways: return PermissionsKit.Permission.locationAlways
-        case .motion: return PermissionsKit.Permission.motion
-        case .mediaLibrary: return PermissionsKit.Permission.mediaLibrary
-        case .tracking: return PermissionsKit.Permission.tracking
-        case .siri: return PermissionsKit.Permission.siri
-#if os(iOS) && PERMISSIONSKIT_HEALTH
-        case .health: return PermissionsKit.Permission.health
-#endif
+//        case .locationAlways: return PermissionsKit.Permission.locationAlways
+//        case .motion: return PermissionsKit.Permission.motion
+//        case .mediaLibrary: return PermissionsKit.Permission.mediaLibrary
+//        case .tracking: return PermissionsKit.Permission.tracking
+//        case .siri: return PermissionsKit.Permission.siri
+//#if os(iOS) && PERMISSIONSKIT_HEALTH
+//        case .health: return PermissionsKit.Permission.health
+//#endif
         }
     }
     
@@ -205,22 +205,22 @@ public enum Permission: CaseIterable, Hashable {
         case .bluetooth: return "bluetooth"
         case .notification: return "notification"
         case .faceId: return "faceId"
-        case .camera: return "camera"
-        case .photoLibrary: return "photoLibrary"
-        case .microphone: return "microphone"
-        case .calendar: return "calendar"
-        case .contacts: return "contacts"
-        case .reminders: return "reminders"
-        case .speechRecognizer: return "speechRecognizer"
+//        case .camera: return "camera"
+//        case .photoLibrary: return "photoLibrary"
+//        case .microphone: return "microphone"
+//        case .calendar: return "calendar"
+//        case .contacts: return "contacts"
+//        case .reminders: return "reminders"
+//        case .speechRecognizer: return "speechRecognizer"
         case .locationWhenInUse: return "locationWhenInUse"
-        case .locationAlways: return "locationAlways"
-        case .motion: return "motion"
-        case .mediaLibrary: return "mediaLibrary"
-        case .tracking: return "tracking"
-        case .siri: return "siri"
-#if os(iOS) && PERMISSIONSKIT_HEALTH
-        case .health: return "health"
-#endif
+//        case .locationAlways: return "locationAlways"
+//        case .motion: return "motion"
+//        case .mediaLibrary: return "mediaLibrary"
+//        case .tracking: return "tracking"
+//        case .siri: return "siri"
+//#if os(iOS) && PERMISSIONSKIT_HEALTH
+//        case .health: return "health"
+//#endif
         }
     }
     
@@ -276,22 +276,22 @@ public enum Permission: CaseIterable, Hashable {
             case .bluetooth: let key = PermissionsKit.Permission.bluetooth.usageDescriptionKey; let status = PermissionsKit.Permission.bluetooth.status; Logger.log("Permission: \(permission.permission.kind.name): key: \(String(describing: key)), status: \(status)")
             case .notification: let authorized = PermissionsKit.Permission.notification.authorized; Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
             case .faceId: let authorized = PermissionsKit.Permission.faceID.authorized; Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
-            case .camera: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.camera.authorized)")
-            case .photoLibrary: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.photoLibrary.authorized)")
-            case .microphone: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.microphone.authorized)")
-            case .calendar: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.calendar.authorized)")
-            case .contacts: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.contacts.authorized)")
-            case .reminders: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.reminders.authorized)")
-            case .speechRecognizer: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.speech.authorized)")
+//            case .camera: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.camera.authorized)")
+//            case .photoLibrary: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.photoLibrary.authorized)")
+//            case .microphone: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.microphone.authorized)")
+//            case .calendar: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.calendar.authorized)")
+//            case .contacts: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.contacts.authorized)")
+//            case .reminders: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.reminders.authorized)")
+//            case .speechRecognizer: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.speech.authorized)")
             case .locationWhenInUse: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.locationWhenInUse.authorized)")
-            case .locationAlways: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.locationAlways.authorized)")
-            case .motion: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.motion.authorized)")
-            case .mediaLibrary: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.mediaLibrary.authorized)")
-            case .tracking: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.tracking.authorized)")
-            case .siri: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.siri.authorized)")
-#if os(iOS) && PERMISSIONSKIT_HEALTH
-            case .health: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.health.authorized)")
-#endif
+//            case .locationAlways: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.locationAlways.authorized)")
+//            case .motion: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.motion.authorized)")
+//            case .mediaLibrary: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.mediaLibrary.authorized)")
+//            case .tracking: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.tracking.authorized)")
+//            case .siri: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.siri.authorized)")
+//#if os(iOS) && PERMISSIONSKIT_HEALTH
+//            case .health: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.health.authorized)")
+//#endif
             }
         }
     }
@@ -302,22 +302,22 @@ public enum Permission: CaseIterable, Hashable {
         case .bluetooth: return PermissionsKit.Permission.bluetooth.request(completion: completion)
         case .notification: return PermissionsKit.Permission.notification.request(completion: completion)
         case .faceId: return PermissionsKit.Permission.faceID.request(completion: completion)
-        case .camera: return PermissionsKit.Permission.camera.request(completion: completion)
-        case .photoLibrary: return PermissionsKit.Permission.photoLibrary.request(completion: completion)
-        case .microphone: return PermissionsKit.Permission.microphone.request(completion: completion)
-        case .calendar: return PermissionsKit.Permission.calendar.request(completion: completion)
-        case .contacts: return PermissionsKit.Permission.contacts.request(completion: completion)
-        case .reminders: return PermissionsKit.Permission.reminders.request(completion: completion)
-        case .speechRecognizer: return PermissionsKit.Permission.speech.request(completion: completion)
+//        case .camera: return PermissionsKit.Permission.camera.request(completion: completion)
+//        case .photoLibrary: return PermissionsKit.Permission.photoLibrary.request(completion: completion)
+//        case .microphone: return PermissionsKit.Permission.microphone.request(completion: completion)
+//        case .calendar: return PermissionsKit.Permission.calendar.request(completion: completion)
+//        case .contacts: return PermissionsKit.Permission.contacts.request(completion: completion)
+//        case .reminders: return PermissionsKit.Permission.reminders.request(completion: completion)
+//        case .speechRecognizer: return PermissionsKit.Permission.speech.request(completion: completion)
         case .locationWhenInUse: return PermissionsKit.Permission.locationWhenInUse.request(completion: completion)
-        case .locationAlways: return PermissionsKit.Permission.locationAlways.request(completion: completion)
-        case .motion: return PermissionsKit.Permission.motion.request(completion: completion)
-        case .mediaLibrary: return PermissionsKit.Permission.mediaLibrary.request(completion: completion)
-        case .tracking: return PermissionsKit.Permission.tracking.request(completion: completion)
-        case .siri: return PermissionsKit.Permission.siri.request(completion: completion)
-#if os(iOS) && PERMISSIONSKIT_HEALTH
-        case .health: return PermissionsKit.Permission.health.request(completion: completion)
-#endif
+//        case .locationAlways: return PermissionsKit.Permission.locationAlways.request(completion: completion)
+//        case .motion: return PermissionsKit.Permission.motion.request(completion: completion)
+//        case .mediaLibrary: return PermissionsKit.Permission.mediaLibrary.request(completion: completion)
+//        case .tracking: return PermissionsKit.Permission.tracking.request(completion: completion)
+//        case .siri: return PermissionsKit.Permission.siri.request(completion: completion)
+//#if os(iOS) && PERMISSIONSKIT_HEALTH
+//        case .health: return PermissionsKit.Permission.health.request(completion: completion)
+//#endif
         }
     }
 }

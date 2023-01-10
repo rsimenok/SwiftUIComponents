@@ -44,7 +44,7 @@ let package = Package(
                 // PermissionsKit
                 // .product(name: "CameraPermission", package: "PermissionsKit"),
                 // .product(name: "PhotoLibraryPermission", package: "PermissionsKit"),
-                // .product(name: "NotificationPermission", package: "PermissionsKit"),
+                 .product(name: "NotificationPermission", package: "PermissionsKit"),
                 // .product(name: "MicrophonePermission", package: "PermissionsKit"),
                 // .product(name: "CalendarPermission", package: "PermissionsKit"),
                 // .product(name: "ContactsPermission", package: "PermissionsKit"),
