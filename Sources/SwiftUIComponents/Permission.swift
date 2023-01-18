@@ -11,7 +11,7 @@ import CloudyLogs
 import PermissionsKit
 
 import BluetoothPermission
-import NotificationPermission
+//import NotificationPermission
 import FaceIDPermission
 //import CameraPermission
 //import PhotoLibraryPermission
@@ -20,7 +20,7 @@ import FaceIDPermission
 //import ContactsPermission
 //import RemindersPermission
 //import SpeechRecognizerPermission
-import LocationWhenInUsePermission
+//import LocationWhenInUsePermission
 //import LocationAlwaysPermission
 //import MotionPermission
 //import MediaLibraryPermission
@@ -179,7 +179,7 @@ public enum Permission: CaseIterable, Hashable {
     internal var permission: PermissionsKit.Permission {
         switch self {
         case .bluetooth: return PermissionsKit.Permission.bluetooth
-        case .notification: return PermissionsKit.Permission.notification
+//        case .notification: return PermissionsKit.Permission.notification
         case .faceId: return PermissionsKit.Permission.faceID
 //        case .camera: return PermissionsKit.Permission.camera
 //        case .photoLibrary: return PermissionsKit.Permission.photoLibrary
@@ -188,7 +188,7 @@ public enum Permission: CaseIterable, Hashable {
 //        case .contacts: return PermissionsKit.Permission.contacts
 //        case .reminders: return PermissionsKit.Permission.reminders
 //        case .speechRecognizer: return PermissionsKit.Permission.speech
-        case .locationWhenInUse: return PermissionsKit.Permission.locationWhenInUse
+//        case .locationWhenInUse: return PermissionsKit.Permission.locationWhenInUse
 //        case .locationAlways: return PermissionsKit.Permission.locationAlways
 //        case .motion: return PermissionsKit.Permission.motion
 //        case .mediaLibrary: return PermissionsKit.Permission.mediaLibrary
@@ -274,7 +274,7 @@ public enum Permission: CaseIterable, Hashable {
             switch permission {
                
             case .bluetooth: let key = PermissionsKit.Permission.bluetooth.usageDescriptionKey; let status = PermissionsKit.Permission.bluetooth.status; Logger.log("Permission: \(permission.permission.kind.name): key: \(String(describing: key)), status: \(status)")
-            case .notification: let authorized = PermissionsKit.Permission.notification.authorized; Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
+//            case .notification: let authorized = PermissionsKit.Permission.notification.authorized; Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
             case .faceId: let authorized = PermissionsKit.Permission.faceID.authorized; Logger.log("Permission: \(permission.permission.kind.name): authorized: \(authorized)")
 //            case .camera: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.camera.authorized)")
 //            case .photoLibrary: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.photoLibrary.authorized)")
@@ -283,7 +283,7 @@ public enum Permission: CaseIterable, Hashable {
 //            case .contacts: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.contacts.authorized)")
 //            case .reminders: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.reminders.authorized)")
 //            case .speechRecognizer: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.speech.authorized)")
-            case .locationWhenInUse: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.locationWhenInUse.authorized)")
+//            case .locationWhenInUse: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.locationWhenInUse.authorized)")
 //            case .locationAlways: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.locationAlways.authorized)")
 //            case .motion: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.motion.authorized)")
 //            case .mediaLibrary: Logger.log("Permission: \(permission.permission.kind.name): authorized: \(PermissionsKit.Permission.mediaLibrary.authorized)")
@@ -300,7 +300,7 @@ public enum Permission: CaseIterable, Hashable {
         
         switch self {
         case .bluetooth: return PermissionsKit.Permission.bluetooth.request(completion: completion)
-        case .notification: return PermissionsKit.Permission.notification.request(completion: completion)
+//        case .notification: return PermissionsKit.Permission.notification.request(completion: completion)
         case .faceId: return PermissionsKit.Permission.faceID.request(completion: completion)
 //        case .camera: return PermissionsKit.Permission.camera.request(completion: completion)
 //        case .photoLibrary: return PermissionsKit.Permission.photoLibrary.request(completion: completion)
@@ -309,7 +309,7 @@ public enum Permission: CaseIterable, Hashable {
 //        case .contacts: return PermissionsKit.Permission.contacts.request(completion: completion)
 //        case .reminders: return PermissionsKit.Permission.reminders.request(completion: completion)
 //        case .speechRecognizer: return PermissionsKit.Permission.speech.request(completion: completion)
-        case .locationWhenInUse: return PermissionsKit.Permission.locationWhenInUse.request(completion: completion)
+//        case .locationWhenInUse: return PermissionsKit.Permission.locationWhenInUse.request(completion: completion)
 //        case .locationAlways: return PermissionsKit.Permission.locationAlways.request(completion: completion)
 //        case .motion: return PermissionsKit.Permission.motion.request(completion: completion)
 //        case .mediaLibrary: return PermissionsKit.Permission.mediaLibrary.request(completion: completion)
