@@ -157,7 +157,7 @@ import FaceIDPermission
 public enum Permission: CaseIterable, Hashable {
         
     case bluetooth
-    case notification
+//    case notification
     case faceId
 //    case camera
 //    case photoLibrary
@@ -166,7 +166,7 @@ public enum Permission: CaseIterable, Hashable {
 //    case contacts
 //    case reminders
 //    case speechRecognizer
-    case locationWhenInUse
+//    case locationWhenInUse
 //    case locationAlways
 //    case motion
 //    case mediaLibrary
@@ -203,7 +203,7 @@ public enum Permission: CaseIterable, Hashable {
     public var name: String {
         switch self {
         case .bluetooth: return "bluetooth"
-        case .notification: return "notification"
+//        case .notification: return "notification"
         case .faceId: return "faceId"
 //        case .camera: return "camera"
 //        case .photoLibrary: return "photoLibrary"
@@ -212,7 +212,7 @@ public enum Permission: CaseIterable, Hashable {
 //        case .contacts: return "contacts"
 //        case .reminders: return "reminders"
 //        case .speechRecognizer: return "speechRecognizer"
-        case .locationWhenInUse: return "locationWhenInUse"
+//        case .locationWhenInUse: return "locationWhenInUse"
 //        case .locationAlways: return "locationAlways"
 //        case .motion: return "motion"
 //        case .mediaLibrary: return "mediaLibrary"
