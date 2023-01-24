@@ -37,7 +37,7 @@ public struct ClearButton: ViewModifier {
                     self.text = ""
                 }
             }) {
-                Image(systemName: "delete.left")
+                Image(systemName: "multiply.circle")
                     .foregroundColor(foregroundColor)
             }
             .opacity(text.isEmpty ? 0:1)
